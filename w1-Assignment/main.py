@@ -5,25 +5,25 @@ from utils.tokenizer_helpers import token_count, tokenize, visualize_boundaries
 if __name__ == "__main__":
     print("=== Text Analysis Tool ===")
     
-    # 🔹 Ask which model to use
+    # Asks which model to use
     model_choice = ""
     while model_choice.lower() not in ["gemini", "deepseek"]:
         model_choice = input("Choose a model (gemini / deepseek): ").strip().lower()
 
-    # 🔹 Ask for input text
+    # Asks for input text
     sample_text = input("\nEnter a paragraph to summarize:\n")
 
-    # 🔹 Language Detection
+    # Language Detection
     lang_info = detect_language(sample_text)
     print("\n=== LANGUAGE DETECTION ===")
     print(f"Detected: {lang_info['language']}")
     print("Probabilities:", lang_info["probabilities"])
 
-    # 🔹 Summarization
+    # Summarization
     print(f"\n📝 Running summarization with {model_choice}...\n")
     summary = summarize(sample_text, model_choice)
 
-    # 🔹 Tokenization with GPT and BERT
+    # Tokenization with GPT and BERT
     for model in ["gpt", "bert"]:
         result = tokenize(sample_text, model=model)
         print(f"\n=== {model.upper()} Tokenization ===")
@@ -33,12 +33,12 @@ if __name__ == "__main__":
         print("Avg Token Length:", result["avg_token_length"])
         print("Boundaries:", visualize_boundaries(result["boundaries"]))
 
-    # 🔹 Token counts + cost
+    # Token counts + cost
     input_tokens = token_count(sample_text)
     output_tokens = token_count(summary)
     est_cost = estimate_cost(input_tokens, output_tokens, model_choice)
 
-    # 🔹 Print results
+    # Print results
     print("\n=== SUMMARY ===")
     print(summary)
     print("\n=== STATS ===")
