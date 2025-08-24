@@ -1,9 +1,7 @@
-# main.py
-
 import argparse
 import json
 from utils.llm_helpers import summarize, estimate_cost
-from utils.tokenizer_helpers import token_count
+from utils.tokenizer_helpers import token_count, tokenize, visualize_boundaries
 
 
 def main():
@@ -57,4 +55,13 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    sample_text = "AI is transforming industries 🚀!"
+    
+    for model in ["gpt", "bert"]:
+        result = tokenize(sample_text, model=model)
+        print(f"\n=== {model.upper()} Tokenization ===")
+        print("Tokens:", result["tokens"])
+        print("Token Count:", result["token_count"])
+        print("Unique Tokens:", result["unique_tokens"])
+        print("Avg Token Length:", result["avg_token_length"])
+        print("Boundaries:", visualize_boundaries(result["boundaries"]))
