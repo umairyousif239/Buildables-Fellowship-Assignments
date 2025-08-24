@@ -55,7 +55,7 @@ def main():
 
 
 if __name__ == "__main__":
-    sample_text = "AI is transforming industries 🚀!"
+    sample_text = input("Enter a paragraph to summarize.\n")
     
     for model in ["gpt", "bert"]:
         result = tokenize(sample_text, model=model)

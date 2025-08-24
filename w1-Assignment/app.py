@@ -21,8 +21,11 @@ if st.button("Summarize with LLM"):
         st.write(summary)
 
         # Token stats
-        input_tokens = token_count(text)
-        output_tokens = token_count(summary)
+        gpt_tokens = tokenize(text, model="gpt")
+        input_tokens = gpt_tokens["token_count"]
+
+        summary_tokens = tokenize(summary, model="gpt")
+        output_tokens = summary_tokens["token_count"]
         st.subheader("📊 Token Usage")
         st.write(f"**Input tokens:** {input_tokens}")
         st.write(f"**Output tokens:** {output_tokens}")
