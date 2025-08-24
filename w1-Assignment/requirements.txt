@@ -1,0 +1,5 @@
+openai
+transformers
+nltk
+deepseek
+google-generativeai
