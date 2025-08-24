@@ -1,6 +1,6 @@
 openai
 transformers
-nltk
 deepseek
 google-generativeai
 streamlit
+langdetect

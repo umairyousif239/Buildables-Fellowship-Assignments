@@ -1,4 +1,5 @@
 import streamlit as st
+from utils.language_helpers import detect_language
 from utils.llm_helpers import summarize, estimate_cost
 from utils.tokenizer_helpers import tokenize, visualize_boundaries, token_count
 
@@ -15,6 +16,12 @@ if st.button("Summarize with LLM"):
     if not text.strip():
         st.warning("⚠️ Please enter some text first.")
     else:
+        # Language Detection
+        lang_info = detect_language(text)
+        st.subheader("🌍 Language Detection")
+        st.write(f"**Detected Language:** {lang_info['language']}")
+        if lang_info["probabilities"]:
+            st.write("**Probabilities:**", lang_info["probabilities"])
         # Summarization
         summary = summarize(text, model_choice)
         st.subheader("📄 Summary")
