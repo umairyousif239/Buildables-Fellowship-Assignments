@@ -1,0 +1,2850 @@
+[
+    {
+        "model": "gemini",
+        "input_text": "In a quiet corner of the old city, there stood a clockmaker’s shop, its windows filled with timepieces of every size and shape. Few customers came anymore; the world had grown too fast for ticking gears and polished brass. Yet the clockmaker, Mr. Alwin, continued his work with steady hands, winding springs and adjusting pendulums as if tending to living things.\n\nOne evening, as the rain pattered against the cobblestones, a young boy wandered in. He was drawn not by the clocks, but by a strange glow from the back of the shop. Mr. Alwin, without a word, beckoned him closer.\n\nThere, hidden behind a velvet curtain, stood a clock unlike any other. Its face shimmered like moonlight, and its hands moved not in hours or minutes but in constellations. With each turn, stars shifted across its surface, mapping skies the boy had never seen.\n\n“This one,” the clockmaker whispered, “does not measure time. It measures possibility.”\n\nThe boy leaned closer, mesmerized. In its shining glass, he glimpsed futures unfolding—some wondrous, some terrifying, all waiting beyond the present moment.\n\nBy morning, the clock and the boy were gone. Only Mr. Alwin remained, smiling faintly, as though another destiny had just begun.",
+        "summary": "An aging clockmaker, Mr. Alwin, maintains his nearly forgotten shop until a boy discovers a hidden clock that doesn't measure time, but possibilities.  The boy glimpses various futures within the clock's shimmering face, and disappears with it by morning, leaving Mr. Alwin with a knowing smile.\n",
+        "language": "en",
+        "probabilities": {
+            "en": 0.9999956820288476
+        },
+        "input_tokens": 288,
+        "output_tokens": 64,
+        "estimated_cost": 0.00024,
+        "gpt_tokens": {
+            "tokens": [
+                "In",
+                " a",
+                " quiet",
+                " corner",
+                " of",
+                " the",
+                " old",
+                " city",
+                ",",
+                " there",
+                " stood",
+                " a",
+                " clock",
+                "maker",
+                "�",
+                "�",
+                "s",
+                " shop",
+                ",",
+                " its",
+                " windows",
+                " filled",
+                " with",
+                " time",
+                "pieces",
+                " of",
+                " every",
+                " size",
+                " and",
+                " shape",
+                ".",
+                " Few",
+                " customers",
+                " came",
+                " anymore",
+                ";",
+                " the",
+                " world",
+                " had",
+                " grown",
+                " too",
+                " fast",
+                " for",
+                " ticking",
+                " gears",
+                " and",
+                " polished",
+                " brass",
+                ".",
+                " Yet",
+                " the",
+                " clock",
+                "maker",
+                ",",
+                " Mr",
+                ".",
+                " Al",
+                "win",
+                ",",
+                " continued",
+                " his",
+                " work",
+                " with",
+                " steady",
+                " hands",
+                ",",
+                " winding",
+                " springs",
+                " and",
+                " adjusting",
+                " pend",
+                "ul",
+                "ums",
+                " as",
+                " if",
+                " tending",
+                " to",
+                " living",
+                " things",
+                ".",
+                "\n",
+                "\n",
+                "One",
+                " evening",
+                ",",
+                " as",
+                " the",
+                " rain",
+                " pat",
+                "tered",
+                " against",
+                " the",
+                " cob",
+                "bl",
+                "estones",
+                ",",
+                " a",
+                " young",
+                " boy",
+                " wandered",
+                " in",
+                ".",
+                " He",
+                " was",
+                " drawn",
+                " not",
+                " by",
+                " the",
+                " clocks",
+                ",",
+                " but",
+                " by",
+                " a",
+                " strange",
+                " glow",
+                " from",
+                " the",
+                " back",
+                " of",
+                " the",
+                " shop",
+                ".",
+                " Mr",
+                ".",
+                " Al",
+                "win",
+                ",",
+                " without",
+                " a",
+                " word",
+                ",",
+                " beck",
+                "oned",
+                " him",
+                " closer",
+                ".",
+                "\n",
+                "\n",
+                "There",
+                ",",
+                " hidden",
+                " behind",
+                " a",
+                " velvet",
+                " curtain",
+                ",",
+                " stood",
+                " a",
+                " clock",
+                " unlike",
+                " any",
+                " other",
+                ".",
+                " Its",
+                " face",
+                " sh",
+                "imm",
+                "ered",
+                " like",
+                " moon",
+                "light",
+                ",",
+                " and",
+                " its",
+                " hands",
+                " moved",
+                " not",
+                " in",
+                " hours",
+                " or",
+                " minutes",
+                " but",
+                " in",
+                " const",
+                "ell",
+                "ations",
+                ".",
+                " With",
+                " each",
+                " turn",
+                ",",
+                " stars",
+                " shifted",
+                " across",
+                " its",
+                " surface",
+                ",",
+                " mapping",
+                " skies",
+                " the",
+                " boy",
+                " had",
+                " never",
+                " seen",
+                ".",
+                "\n",
+                "\n",
+                "�",
+                "�",
+                "This",
+                " one",
+                ",",
+                "�",
+                "�",
+                " the",
+                " clock",
+                "maker",
+                " whispered",
+                ",",
+                " �",
+                "�",
+                "does",
+                " not",
+                " measure",
+                " time",
+                ".",
+                " It",
+                " measures",
+                " possibility",
+                ".",
+                "�",
+                "�",
+                "\n",
+                "\n",
+                "The",
+                " boy",
+                " leaned",
+                " closer",
+                ",",
+                " mesmer",
+                "ized",
+                ".",
+                " In",
+                " its",
+                " shining",
+                " glass",
+                ",",
+                " he",
+                " glimps",
+                "ed",
+                " futures",
+                " unfolding",
+                "—",
+                "some",
+                " wond",
+                "rous",
+                ",",
+                " some",
+                " terrifying",
+                ",",
+                " all",
+                " waiting",
+                " beyond",
+                " the",
+                " present",
+                " moment",
+                ".",
+                "\n",
+                "\n",
+                "By",
+                " morning",
+                ",",
+                " the",
+                " clock",
+                " and",
+                " the",
+                " boy",
+                " were",
+                " gone",
+                ".",
+                " Only",
+                " Mr",
+                ".",
+                " Al",
+                "win",
+                " remained",
+                ",",
+                " smiling",
+                " faintly",
+                ",",
+                " as",
+                " though",
+                " another",
+                " destiny",
+                " had",
+                " just",
+                " begun",
+                "."
+            ],
+            "token_count": 288,
+            "unique_tokens": 173,
+            "avg_token_length": 4.25,
+            "model": "gpt",
+            "boundaries": [
+                [
+                    0,
+                    "In"
+                ],
+                [
+                    1,
+                    " a"
+                ],
+                [
+                    2,
+                    " quiet"
+                ],
+                [
+                    3,
+                    " corner"
+                ],
+                [
+                    4,
+                    " of"
+                ],
+                [
+                    5,
+                    " the"
+                ],
+                [
+                    6,
+                    " old"
+                ],
+                [
+                    7,
+                    " city"
+                ],
+                [
+                    8,
+                    ","
+                ],
+                [
+                    9,
+                    " there"
+                ],
+                [
+                    10,
+                    " stood"
+                ],
+                [
+                    11,
+                    " a"
+                ],
+                [
+                    12,
+                    " clock"
+                ],
+                [
+                    13,
+                    "maker"
+                ],
+                [
+                    14,
+                    "�"
+                ],
+                [
+                    15,
+                    "�"
+                ],
+                [
+                    16,
+                    "s"
+                ],
+                [
+                    17,
+                    " shop"
+                ],
+                [
+                    18,
+                    ","
+                ],
+                [
+                    19,
+                    " its"
+                ],
+                [
+                    20,
+                    " windows"
+                ],
+                [
+                    21,
+                    " filled"
+                ],
+                [
+                    22,
+                    " with"
+                ],
+                [
+                    23,
+                    " time"
+                ],
+                [
+                    24,
+                    "pieces"
+                ],
+                [
+                    25,
+                    " of"
+                ],
+                [
+                    26,
+                    " every"
+                ],
+                [
+                    27,
+                    " size"
+                ],
+                [
+                    28,
+                    " and"
+                ],
+                [
+                    29,
+                    " shape"
+                ],
+                [
+                    30,
+                    "."
+                ],
+                [
+                    31,
+                    " Few"
+                ],
+                [
+                    32,
+                    " customers"
+                ],
+                [
+                    33,
+                    " came"
+                ],
+                [
+                    34,
+                    " anymore"
+                ],
+                [
+                    35,
+                    ";"
+                ],
+                [
+                    36,
+                    " the"
+                ],
+                [
+                    37,
+                    " world"
+                ],
+                [
+                    38,
+                    " had"
+                ],
+                [
+                    39,
+                    " grown"
+                ],
+                [
+                    40,
+                    " too"
+                ],
+                [
+                    41,
+                    " fast"
+                ],
+                [
+                    42,
+                    " for"
+                ],
+                [
+                    43,
+                    " ticking"
+                ],
+                [
+                    44,
+                    " gears"
+                ],
+                [
+                    45,
+                    " and"
+                ],
+                [
+                    46,
+                    " polished"
+                ],
+                [
+                    47,
+                    " brass"
+                ],
+                [
+                    48,
+                    "."
+                ],
+                [
+                    49,
+                    " Yet"
+                ],
+                [
+                    50,
+                    " the"
+                ],
+                [
+                    51,
+                    " clock"
+                ],
+                [
+                    52,
+                    "maker"
+                ],
+                [
+                    53,
+                    ","
+                ],
+                [
+                    54,
+                    " Mr"
+                ],
+                [
+                    55,
+                    "."
+                ],
+                [
+                    56,
+                    " Al"
+                ],
+                [
+                    57,
+                    "win"
+                ],
+                [
+                    58,
+                    ","
+                ],
+                [
+                    59,
+                    " continued"
+                ],
+                [
+                    60,
+                    " his"
+                ],
+                [
+                    61,
+                    " work"
+                ],
+                [
+                    62,
+                    " with"
+                ],
+                [
+                    63,
+                    " steady"
+                ],
+                [
+                    64,
+                    " hands"
+                ],
+                [
+                    65,
+                    ","
+                ],
+                [
+                    66,
+                    " winding"
+                ],
+                [
+                    67,
+                    " springs"
+                ],
+                [
+                    68,
+                    " and"
+                ],
+                [
+                    69,
+                    " adjusting"
+                ],
+                [
+                    70,
+                    " pend"
+                ],
+                [
+                    71,
+                    "ul"
+                ],
+                [
+                    72,
+                    "ums"
+                ],
+                [
+                    73,
+                    " as"
+                ],
+                [
+                    74,
+                    " if"
+                ],
+                [
+                    75,
+                    " tending"
+                ],
+                [
+                    76,
+                    " to"
+                ],
+                [
+                    77,
+                    " living"
+                ],
+                [
+                    78,
+                    " things"
+                ],
+                [
+                    79,
+                    "."
+                ],
+                [
+                    80,
+                    "\n"
+                ],
+                [
+                    81,
+                    "\n"
+                ],
+                [
+                    82,
+                    "One"
+                ],
+                [
+                    83,
+                    " evening"
+                ],
+                [
+                    84,
+                    ","
+                ],
+                [
+                    85,
+                    " as"
+                ],
+                [
+                    86,
+                    " the"
+                ],
+                [
+                    87,
+                    " rain"
+                ],
+                [
+                    88,
+                    " pat"
+                ],
+                [
+                    89,
+                    "tered"
+                ],
+                [
+                    90,
+                    " against"
+                ],
+                [
+                    91,
+                    " the"
+                ],
+                [
+                    92,
+                    " cob"
+                ],
+                [
+                    93,
+                    "bl"
+                ],
+                [
+                    94,
+                    "estones"
+                ],
+                [
+                    95,
+                    ","
+                ],
+                [
+                    96,
+                    " a"
+                ],
+                [
+                    97,
+                    " young"
+                ],
+                [
+                    98,
+                    " boy"
+                ],
+                [
+                    99,
+                    " wandered"
+                ],
+                [
+                    100,
+                    " in"
+                ],
+                [
+                    101,
+                    "."
+                ],
+                [
+                    102,
+                    " He"
+                ],
+                [
+                    103,
+                    " was"
+                ],
+                [
+                    104,
+                    " drawn"
+                ],
+                [
+                    105,
+                    " not"
+                ],
+                [
+                    106,
+                    " by"
+                ],
+                [
+                    107,
+                    " the"
+                ],
+                [
+                    108,
+                    " clocks"
+                ],
+                [
+                    109,
+                    ","
+                ],
+                [
+                    110,
+                    " but"
+                ],
+                [
+                    111,
+                    " by"
+                ],
+                [
+                    112,
+                    " a"
+                ],
+                [
+                    113,
+                    " strange"
+                ],
+                [
+                    114,
+                    " glow"
+                ],
+                [
+                    115,
+                    " from"
+                ],
+                [
+                    116,
+                    " the"
+                ],
+                [
+                    117,
+                    " back"
+                ],
+                [
+                    118,
+                    " of"
+                ],
+                [
+                    119,
+                    " the"
+                ],
+                [
+                    120,
+                    " shop"
+                ],
+                [
+                    121,
+                    "."
+                ],
+                [
+                    122,
+                    " Mr"
+                ],
+                [
+                    123,
+                    "."
+                ],
+                [
+                    124,
+                    " Al"
+                ],
+                [
+                    125,
+                    "win"
+                ],
+                [
+                    126,
+                    ","
+                ],
+                [
+                    127,
+                    " without"
+                ],
+                [
+                    128,
+                    " a"
+                ],
+                [
+                    129,
+                    " word"
+                ],
+                [
+                    130,
+                    ","
+                ],
+                [
+                    131,
+                    " beck"
+                ],
+                [
+                    132,
+                    "oned"
+                ],
+                [
+                    133,
+                    " him"
+                ],
+                [
+                    134,
+                    " closer"
+                ],
+                [
+                    135,
+                    "."
+                ],
+                [
+                    136,
+                    "\n"
+                ],
+                [
+                    137,
+                    "\n"
+                ],
+                [
+                    138,
+                    "There"
+                ],
+                [
+                    139,
+                    ","
+                ],
+                [
+                    140,
+                    " hidden"
+                ],
+                [
+                    141,
+                    " behind"
+                ],
+                [
+                    142,
+                    " a"
+                ],
+                [
+                    143,
+                    " velvet"
+                ],
+                [
+                    144,
+                    " curtain"
+                ],
+                [
+                    145,
+                    ","
+                ],
+                [
+                    146,
+                    " stood"
+                ],
+                [
+                    147,
+                    " a"
+                ],
+                [
+                    148,
+                    " clock"
+                ],
+                [
+                    149,
+                    " unlike"
+                ],
+                [
+                    150,
+                    " any"
+                ],
+                [
+                    151,
+                    " other"
+                ],
+                [
+                    152,
+                    "."
+                ],
+                [
+                    153,
+                    " Its"
+                ],
+                [
+                    154,
+                    " face"
+                ],
+                [
+                    155,
+                    " sh"
+                ],
+                [
+                    156,
+                    "imm"
+                ],
+                [
+                    157,
+                    "ered"
+                ],
+                [
+                    158,
+                    " like"
+                ],
+                [
+                    159,
+                    " moon"
+                ],
+                [
+                    160,
+                    "light"
+                ],
+                [
+                    161,
+                    ","
+                ],
+                [
+                    162,
+                    " and"
+                ],
+                [
+                    163,
+                    " its"
+                ],
+                [
+                    164,
+                    " hands"
+                ],
+                [
+                    165,
+                    " moved"
+                ],
+                [
+                    166,
+                    " not"
+                ],
+                [
+                    167,
+                    " in"
+                ],
+                [
+                    168,
+                    " hours"
+                ],
+                [
+                    169,
+                    " or"
+                ],
+                [
+                    170,
+                    " minutes"
+                ],
+                [
+                    171,
+                    " but"
+                ],
+                [
+                    172,
+                    " in"
+                ],
+                [
+                    173,
+                    " const"
+                ],
+                [
+                    174,
+                    "ell"
+                ],
+                [
+                    175,
+                    "ations"
+                ],
+                [
+                    176,
+                    "."
+                ],
+                [
+                    177,
+                    " With"
+                ],
+                [
+                    178,
+                    " each"
+                ],
+                [
+                    179,
+                    " turn"
+                ],
+                [
+                    180,
+                    ","
+                ],
+                [
+                    181,
+                    " stars"
+                ],
+                [
+                    182,
+                    " shifted"
+                ],
+                [
+                    183,
+                    " across"
+                ],
+                [
+                    184,
+                    " its"
+                ],
+                [
+                    185,
+                    " surface"
+                ],
+                [
+                    186,
+                    ","
+                ],
+                [
+                    187,
+                    " mapping"
+                ],
+                [
+                    188,
+                    " skies"
+                ],
+                [
+                    189,
+                    " the"
+                ],
+                [
+                    190,
+                    " boy"
+                ],
+                [
+                    191,
+                    " had"
+                ],
+                [
+                    192,
+                    " never"
+                ],
+                [
+                    193,
+                    " seen"
+                ],
+                [
+                    194,
+                    "."
+                ],
+                [
+                    195,
+                    "\n"
+                ],
+                [
+                    196,
+                    "\n"
+                ],
+                [
+                    197,
+                    "�"
+                ],
+                [
+                    198,
+                    "�"
+                ],
+                [
+                    199,
+                    "This"
+                ],
+                [
+                    200,
+                    " one"
+                ],
+                [
+                    201,
+                    ","
+                ],
+                [
+                    202,
+                    "�"
+                ],
+                [
+                    203,
+                    "�"
+                ],
+                [
+                    204,
+                    " the"
+                ],
+                [
+                    205,
+                    " clock"
+                ],
+                [
+                    206,
+                    "maker"
+                ],
+                [
+                    207,
+                    " whispered"
+                ],
+                [
+                    208,
+                    ","
+                ],
+                [
+                    209,
+                    " �"
+                ],
+                [
+                    210,
+                    "�"
+                ],
+                [
+                    211,
+                    "does"
+                ],
+                [
+                    212,
+                    " not"
+                ],
+                [
+                    213,
+                    " measure"
+                ],
+                [
+                    214,
+                    " time"
+                ],
+                [
+                    215,
+                    "."
+                ],
+                [
+                    216,
+                    " It"
+                ],
+                [
+                    217,
+                    " measures"
+                ],
+                [
+                    218,
+                    " possibility"
+                ],
+                [
+                    219,
+                    "."
+                ],
+                [
+                    220,
+                    "�"
+                ],
+                [
+                    221,
+                    "�"
+                ],
+                [
+                    222,
+                    "\n"
+                ],
+                [
+                    223,
+                    "\n"
+                ],
+                [
+                    224,
+                    "The"
+                ],
+                [
+                    225,
+                    " boy"
+                ],
+                [
+                    226,
+                    " leaned"
+                ],
+                [
+                    227,
+                    " closer"
+                ],
+                [
+                    228,
+                    ","
+                ],
+                [
+                    229,
+                    " mesmer"
+                ],
+                [
+                    230,
+                    "ized"
+                ],
+                [
+                    231,
+                    "."
+                ],
+                [
+                    232,
+                    " In"
+                ],
+                [
+                    233,
+                    " its"
+                ],
+                [
+                    234,
+                    " shining"
+                ],
+                [
+                    235,
+                    " glass"
+                ],
+                [
+                    236,
+                    ","
+                ],
+                [
+                    237,
+                    " he"
+                ],
+                [
+                    238,
+                    " glimps"
+                ],
+                [
+                    239,
+                    "ed"
+                ],
+                [
+                    240,
+                    " futures"
+                ],
+                [
+                    241,
+                    " unfolding"
+                ],
+                [
+                    242,
+                    "—"
+                ],
+                [
+                    243,
+                    "some"
+                ],
+                [
+                    244,
+                    " wond"
+                ],
+                [
+                    245,
+                    "rous"
+                ],
+                [
+                    246,
+                    ","
+                ],
+                [
+                    247,
+                    " some"
+                ],
+                [
+                    248,
+                    " terrifying"
+                ],
+                [
+                    249,
+                    ","
+                ],
+                [
+                    250,
+                    " all"
+                ],
+                [
+                    251,
+                    " waiting"
+                ],
+                [
+                    252,
+                    " beyond"
+                ],
+                [
+                    253,
+                    " the"
+                ],
+                [
+                    254,
+                    " present"
+                ],
+                [
+                    255,
+                    " moment"
+                ],
+                [
+                    256,
+                    "."
+                ],
+                [
+                    257,
+                    "\n"
+                ],
+                [
+                    258,
+                    "\n"
+                ],
+                [
+                    259,
+                    "By"
+                ],
+                [
+                    260,
+                    " morning"
+                ],
+                [
+                    261,
+                    ","
+                ],
+                [
+                    262,
+                    " the"
+                ],
+                [
+                    263,
+                    " clock"
+                ],
+                [
+                    264,
+                    " and"
+                ],
+                [
+                    265,
+                    " the"
+                ],
+                [
+                    266,
+                    " boy"
+                ],
+                [
+                    267,
+                    " were"
+                ],
+                [
+                    268,
+                    " gone"
+                ],
+                [
+                    269,
+                    "."
+                ],
+                [
+                    270,
+                    " Only"
+                ],
+                [
+                    271,
+                    " Mr"
+                ],
+                [
+                    272,
+                    "."
+                ],
+                [
+                    273,
+                    " Al"
+                ],
+                [
+                    274,
+                    "win"
+                ],
+                [
+                    275,
+                    " remained"
+                ],
+                [
+                    276,
+                    ","
+                ],
+                [
+                    277,
+                    " smiling"
+                ],
+                [
+                    278,
+                    " faintly"
+                ],
+                [
+                    279,
+                    ","
+                ],
+                [
+                    280,
+                    " as"
+                ],
+                [
+                    281,
+                    " though"
+                ],
+                [
+                    282,
+                    " another"
+                ],
+                [
+                    283,
+                    " destiny"
+                ],
+                [
+                    284,
+                    " had"
+                ],
+                [
+                    285,
+                    " just"
+                ],
+                [
+                    286,
+                    " begun"
+                ],
+                [
+                    287,
+                    "."
+                ]
+            ]
+        },
+        "bert_tokens": {
+            "tokens": [
+                "in",
+                "a",
+                "quiet",
+                "corner",
+                "of",
+                "the",
+                "old",
+                "city",
+                ",",
+                "there",
+                "stood",
+                "a",
+                "clock",
+                "##maker",
+                "’",
+                "s",
+                "shop",
+                ",",
+                "its",
+                "windows",
+                "filled",
+                "with",
+                "time",
+                "##piece",
+                "##s",
+                "of",
+                "every",
+                "size",
+                "and",
+                "shape",
+                ".",
+                "few",
+                "customers",
+                "came",
+                "anymore",
+                ";",
+                "the",
+                "world",
+                "had",
+                "grown",
+                "too",
+                "fast",
+                "for",
+                "ticking",
+                "gears",
+                "and",
+                "polished",
+                "brass",
+                ".",
+                "yet",
+                "the",
+                "clock",
+                "##maker",
+                ",",
+                "mr",
+                ".",
+                "al",
+                "##win",
+                ",",
+                "continued",
+                "his",
+                "work",
+                "with",
+                "steady",
+                "hands",
+                ",",
+                "winding",
+                "springs",
+                "and",
+                "adjusting",
+                "pendulum",
+                "##s",
+                "as",
+                "if",
+                "tending",
+                "to",
+                "living",
+                "things",
+                ".",
+                "one",
+                "evening",
+                ",",
+                "as",
+                "the",
+                "rain",
+                "pat",
+                "##tered",
+                "against",
+                "the",
+                "cobb",
+                "##les",
+                "##tones",
+                ",",
+                "a",
+                "young",
+                "boy",
+                "wandered",
+                "in",
+                ".",
+                "he",
+                "was",
+                "drawn",
+                "not",
+                "by",
+                "the",
+                "clocks",
+                ",",
+                "but",
+                "by",
+                "a",
+                "strange",
+                "glow",
+                "from",
+                "the",
+                "back",
+                "of",
+                "the",
+                "shop",
+                ".",
+                "mr",
+                ".",
+                "al",
+                "##win",
+                ",",
+                "without",
+                "a",
+                "word",
+                ",",
+                "beck",
+                "##oned",
+                "him",
+                "closer",
+                ".",
+                "there",
+                ",",
+                "hidden",
+                "behind",
+                "a",
+                "velvet",
+                "curtain",
+                ",",
+                "stood",
+                "a",
+                "clock",
+                "unlike",
+                "any",
+                "other",
+                ".",
+                "its",
+                "face",
+                "shi",
+                "##mmer",
+                "##ed",
+                "like",
+                "moonlight",
+                ",",
+                "and",
+                "its",
+                "hands",
+                "moved",
+                "not",
+                "in",
+                "hours",
+                "or",
+                "minutes",
+                "but",
+                "in",
+                "constellation",
+                "##s",
+                ".",
+                "with",
+                "each",
+                "turn",
+                ",",
+                "stars",
+                "shifted",
+                "across",
+                "its",
+                "surface",
+                ",",
+                "mapping",
+                "skies",
+                "the",
+                "boy",
+                "had",
+                "never",
+                "seen",
+                ".",
+                "“",
+                "this",
+                "one",
+                ",",
+                "”",
+                "the",
+                "clock",
+                "##maker",
+                "whispered",
+                ",",
+                "“",
+                "does",
+                "not",
+                "measure",
+                "time",
+                ".",
+                "it",
+                "measures",
+                "possibility",
+                ".",
+                "”",
+                "the",
+                "boy",
+                "leaned",
+                "closer",
+                ",",
+                "me",
+                "##sm",
+                "##eri",
+                "##zed",
+                ".",
+                "in",
+                "its",
+                "shining",
+                "glass",
+                ",",
+                "he",
+                "glimpse",
+                "##d",
+                "futures",
+                "un",
+                "##folding",
+                "—",
+                "some",
+                "won",
+                "##dro",
+                "##us",
+                ",",
+                "some",
+                "terrifying",
+                ",",
+                "all",
+                "waiting",
+                "beyond",
+                "the",
+                "present",
+                "moment",
+                ".",
+                "by",
+                "morning",
+                ",",
+                "the",
+                "clock",
+                "and",
+                "the",
+                "boy",
+                "were",
+                "gone",
+                ".",
+                "only",
+                "mr",
+                ".",
+                "al",
+                "##win",
+                "remained",
+                ",",
+                "smiling",
+                "faintly",
+                ",",
+                "as",
+                "though",
+                "another",
+                "destiny",
+                "had",
+                "just",
+                "begun",
+                "."
+            ],
+            "token_count": 275,
+            "unique_tokens": 163,
+            "avg_token_length": 3.85,
+            "model": "bert",
+            "boundaries": [
+                [
+                    0,
+                    "in"
+                ],
+                [
+                    1,
+                    "a"
+                ],
+                [
+                    2,
+                    "quiet"
+                ],
+                [
+                    3,
+                    "corner"
+                ],
+                [
+                    4,
+                    "of"
+                ],
+                [
+                    5,
+                    "the"
+                ],
+                [
+                    6,
+                    "old"
+                ],
+                [
+                    7,
+                    "city"
+                ],
+                [
+                    8,
+                    ","
+                ],
+                [
+                    9,
+                    "there"
+                ],
+                [
+                    10,
+                    "stood"
+                ],
+                [
+                    11,
+                    "a"
+                ],
+                [
+                    12,
+                    "clock"
+                ],
+                [
+                    13,
+                    "##maker"
+                ],
+                [
+                    14,
+                    "’"
+                ],
+                [
+                    15,
+                    "s"
+                ],
+                [
+                    16,
+                    "shop"
+                ],
+                [
+                    17,
+                    ","
+                ],
+                [
+                    18,
+                    "its"
+                ],
+                [
+                    19,
+                    "windows"
+                ],
+                [
+                    20,
+                    "filled"
+                ],
+                [
+                    21,
+                    "with"
+                ],
+                [
+                    22,
+                    "time"
+                ],
+                [
+                    23,
+                    "##piece"
+                ],
+                [
+                    24,
+                    "##s"
+                ],
+                [
+                    25,
+                    "of"
+                ],
+                [
+                    26,
+                    "every"
+                ],
+                [
+                    27,
+                    "size"
+                ],
+                [
+                    28,
+                    "and"
+                ],
+                [
+                    29,
+                    "shape"
+                ],
+                [
+                    30,
+                    "."
+                ],
+                [
+                    31,
+                    "few"
+                ],
+                [
+                    32,
+                    "customers"
+                ],
+                [
+                    33,
+                    "came"
+                ],
+                [
+                    34,
+                    "anymore"
+                ],
+                [
+                    35,
+                    ";"
+                ],
+                [
+                    36,
+                    "the"
+                ],
+                [
+                    37,
+                    "world"
+                ],
+                [
+                    38,
+                    "had"
+                ],
+                [
+                    39,
+                    "grown"
+                ],
+                [
+                    40,
+                    "too"
+                ],
+                [
+                    41,
+                    "fast"
+                ],
+                [
+                    42,
+                    "for"
+                ],
+                [
+                    43,
+                    "ticking"
+                ],
+                [
+                    44,
+                    "gears"
+                ],
+                [
+                    45,
+                    "and"
+                ],
+                [
+                    46,
+                    "polished"
+                ],
+                [
+                    47,
+                    "brass"
+                ],
+                [
+                    48,
+                    "."
+                ],
+                [
+                    49,
+                    "yet"
+                ],
+                [
+                    50,
+                    "the"
+                ],
+                [
+                    51,
+                    "clock"
+                ],
+                [
+                    52,
+                    "##maker"
+                ],
+                [
+                    53,
+                    ","
+                ],
+                [
+                    54,
+                    "mr"
+                ],
+                [
+                    55,
+                    "."
+                ],
+                [
+                    56,
+                    "al"
+                ],
+                [
+                    57,
+                    "##win"
+                ],
+                [
+                    58,
+                    ","
+                ],
+                [
+                    59,
+                    "continued"
+                ],
+                [
+                    60,
+                    "his"
+                ],
+                [
+                    61,
+                    "work"
+                ],
+                [
+                    62,
+                    "with"
+                ],
+                [
+                    63,
+                    "steady"
+                ],
+                [
+                    64,
+                    "hands"
+                ],
+                [
+                    65,
+                    ","
+                ],
+                [
+                    66,
+                    "winding"
+                ],
+                [
+                    67,
+                    "springs"
+                ],
+                [
+                    68,
+                    "and"
+                ],
+                [
+                    69,
+                    "adjusting"
+                ],
+                [
+                    70,
+                    "pendulum"
+                ],
+                [
+                    71,
+                    "##s"
+                ],
+                [
+                    72,
+                    "as"
+                ],
+                [
+                    73,
+                    "if"
+                ],
+                [
+                    74,
+                    "tending"
+                ],
+                [
+                    75,
+                    "to"
+                ],
+                [
+                    76,
+                    "living"
+                ],
+                [
+                    77,
+                    "things"
+                ],
+                [
+                    78,
+                    "."
+                ],
+                [
+                    79,
+                    "one"
+                ],
+                [
+                    80,
+                    "evening"
+                ],
+                [
+                    81,
+                    ","
+                ],
+                [
+                    82,
+                    "as"
+                ],
+                [
+                    83,
+                    "the"
+                ],
+                [
+                    84,
+                    "rain"
+                ],
+                [
+                    85,
+                    "pat"
+                ],
+                [
+                    86,
+                    "##tered"
+                ],
+                [
+                    87,
+                    "against"
+                ],
+                [
+                    88,
+                    "the"
+                ],
+                [
+                    89,
+                    "cobb"
+                ],
+                [
+                    90,
+                    "##les"
+                ],
+                [
+                    91,
+                    "##tones"
+                ],
+                [
+                    92,
+                    ","
+                ],
+                [
+                    93,
+                    "a"
+                ],
+                [
+                    94,
+                    "young"
+                ],
+                [
+                    95,
+                    "boy"
+                ],
+                [
+                    96,
+                    "wandered"
+                ],
+                [
+                    97,
+                    "in"
+                ],
+                [
+                    98,
+                    "."
+                ],
+                [
+                    99,
+                    "he"
+                ],
+                [
+                    100,
+                    "was"
+                ],
+                [
+                    101,
+                    "drawn"
+                ],
+                [
+                    102,
+                    "not"
+                ],
+                [
+                    103,
+                    "by"
+                ],
+                [
+                    104,
+                    "the"
+                ],
+                [
+                    105,
+                    "clocks"
+                ],
+                [
+                    106,
+                    ","
+                ],
+                [
+                    107,
+                    "but"
+                ],
+                [
+                    108,
+                    "by"
+                ],
+                [
+                    109,
+                    "a"
+                ],
+                [
+                    110,
+                    "strange"
+                ],
+                [
+                    111,
+                    "glow"
+                ],
+                [
+                    112,
+                    "from"
+                ],
+                [
+                    113,
+                    "the"
+                ],
+                [
+                    114,
+                    "back"
+                ],
+                [
+                    115,
+                    "of"
+                ],
+                [
+                    116,
+                    "the"
+                ],
+                [
+                    117,
+                    "shop"
+                ],
+                [
+                    118,
+                    "."
+                ],
+                [
+                    119,
+                    "mr"
+                ],
+                [
+                    120,
+                    "."
+                ],
+                [
+                    121,
+                    "al"
+                ],
+                [
+                    122,
+                    "##win"
+                ],
+                [
+                    123,
+                    ","
+                ],
+                [
+                    124,
+                    "without"
+                ],
+                [
+                    125,
+                    "a"
+                ],
+                [
+                    126,
+                    "word"
+                ],
+                [
+                    127,
+                    ","
+                ],
+                [
+                    128,
+                    "beck"
+                ],
+                [
+                    129,
+                    "##oned"
+                ],
+                [
+                    130,
+                    "him"
+                ],
+                [
+                    131,
+                    "closer"
+                ],
+                [
+                    132,
+                    "."
+                ],
+                [
+                    133,
+                    "there"
+                ],
+                [
+                    134,
+                    ","
+                ],
+                [
+                    135,
+                    "hidden"
+                ],
+                [
+                    136,
+                    "behind"
+                ],
+                [
+                    137,
+                    "a"
+                ],
+                [
+                    138,
+                    "velvet"
+                ],
+                [
+                    139,
+                    "curtain"
+                ],
+                [
+                    140,
+                    ","
+                ],
+                [
+                    141,
+                    "stood"
+                ],
+                [
+                    142,
+                    "a"
+                ],
+                [
+                    143,
+                    "clock"
+                ],
+                [
+                    144,
+                    "unlike"
+                ],
+                [
+                    145,
+                    "any"
+                ],
+                [
+                    146,
+                    "other"
+                ],
+                [
+                    147,
+                    "."
+                ],
+                [
+                    148,
+                    "its"
+                ],
+                [
+                    149,
+                    "face"
+                ],
+                [
+                    150,
+                    "shi"
+                ],
+                [
+                    151,
+                    "##mmer"
+                ],
+                [
+                    152,
+                    "##ed"
+                ],
+                [
+                    153,
+                    "like"
+                ],
+                [
+                    154,
+                    "moonlight"
+                ],
+                [
+                    155,
+                    ","
+                ],
+                [
+                    156,
+                    "and"
+                ],
+                [
+                    157,
+                    "its"
+                ],
+                [
+                    158,
+                    "hands"
+                ],
+                [
+                    159,
+                    "moved"
+                ],
+                [
+                    160,
+                    "not"
+                ],
+                [
+                    161,
+                    "in"
+                ],
+                [
+                    162,
+                    "hours"
+                ],
+                [
+                    163,
+                    "or"
+                ],
+                [
+                    164,
+                    "minutes"
+                ],
+                [
+                    165,
+                    "but"
+                ],
+                [
+                    166,
+                    "in"
+                ],
+                [
+                    167,
+                    "constellation"
+                ],
+                [
+                    168,
+                    "##s"
+                ],
+                [
+                    169,
+                    "."
+                ],
+                [
+                    170,
+                    "with"
+                ],
+                [
+                    171,
+                    "each"
+                ],
+                [
+                    172,
+                    "turn"
+                ],
+                [
+                    173,
+                    ","
+                ],
+                [
+                    174,
+                    "stars"
+                ],
+                [
+                    175,
+                    "shifted"
+                ],
+                [
+                    176,
+                    "across"
+                ],
+                [
+                    177,
+                    "its"
+                ],
+                [
+                    178,
+                    "surface"
+                ],
+                [
+                    179,
+                    ","
+                ],
+                [
+                    180,
+                    "mapping"
+                ],
+                [
+                    181,
+                    "skies"
+                ],
+                [
+                    182,
+                    "the"
+                ],
+                [
+                    183,
+                    "boy"
+                ],
+                [
+                    184,
+                    "had"
+                ],
+                [
+                    185,
+                    "never"
+                ],
+                [
+                    186,
+                    "seen"
+                ],
+                [
+                    187,
+                    "."
+                ],
+                [
+                    188,
+                    "“"
+                ],
+                [
+                    189,
+                    "this"
+                ],
+                [
+                    190,
+                    "one"
+                ],
+                [
+                    191,
+                    ","
+                ],
+                [
+                    192,
+                    "”"
+                ],
+                [
+                    193,
+                    "the"
+                ],
+                [
+                    194,
+                    "clock"
+                ],
+                [
+                    195,
+                    "##maker"
+                ],
+                [
+                    196,
+                    "whispered"
+                ],
+                [
+                    197,
+                    ","
+                ],
+                [
+                    198,
+                    "“"
+                ],
+                [
+                    199,
+                    "does"
+                ],
+                [
+                    200,
+                    "not"
+                ],
+                [
+                    201,
+                    "measure"
+                ],
+                [
+                    202,
+                    "time"
+                ],
+                [
+                    203,
+                    "."
+                ],
+                [
+                    204,
+                    "it"
+                ],
+                [
+                    205,
+                    "measures"
+                ],
+                [
+                    206,
+                    "possibility"
+                ],
+                [
+                    207,
+                    "."
+                ],
+                [
+                    208,
+                    "”"
+                ],
+                [
+                    209,
+                    "the"
+                ],
+                [
+                    210,
+                    "boy"
+                ],
+                [
+                    211,
+                    "leaned"
+                ],
+                [
+                    212,
+                    "closer"
+                ],
+                [
+                    213,
+                    ","
+                ],
+                [
+                    214,
+                    "me"
+                ],
+                [
+                    215,
+                    "##sm"
+                ],
+                [
+                    216,
+                    "##eri"
+                ],
+                [
+                    217,
+                    "##zed"
+                ],
+                [
+                    218,
+                    "."
+                ],
+                [
+                    219,
+                    "in"
+                ],
+                [
+                    220,
+                    "its"
+                ],
+                [
+                    221,
+                    "shining"
+                ],
+                [
+                    222,
+                    "glass"
+                ],
+                [
+                    223,
+                    ","
+                ],
+                [
+                    224,
+                    "he"
+                ],
+                [
+                    225,
+                    "glimpse"
+                ],
+                [
+                    226,
+                    "##d"
+                ],
+                [
+                    227,
+                    "futures"
+                ],
+                [
+                    228,
+                    "un"
+                ],
+                [
+                    229,
+                    "##folding"
+                ],
+                [
+                    230,
+                    "—"
+                ],
+                [
+                    231,
+                    "some"
+                ],
+                [
+                    232,
+                    "won"
+                ],
+                [
+                    233,
+                    "##dro"
+                ],
+                [
+                    234,
+                    "##us"
+                ],
+                [
+                    235,
+                    ","
+                ],
+                [
+                    236,
+                    "some"
+                ],
+                [
+                    237,
+                    "terrifying"
+                ],
+                [
+                    238,
+                    ","
+                ],
+                [
+                    239,
+                    "all"
+                ],
+                [
+                    240,
+                    "waiting"
+                ],
+                [
+                    241,
+                    "beyond"
+                ],
+                [
+                    242,
+                    "the"
+                ],
+                [
+                    243,
+                    "present"
+                ],
+                [
+                    244,
+                    "moment"
+                ],
+                [
+                    245,
+                    "."
+                ],
+                [
+                    246,
+                    "by"
+                ],
+                [
+                    247,
+                    "morning"
+                ],
+                [
+                    248,
+                    ","
+                ],
+                [
+                    249,
+                    "the"
+                ],
+                [
+                    250,
+                    "clock"
+                ],
+                [
+                    251,
+                    "and"
+                ],
+                [
+                    252,
+                    "the"
+                ],
+                [
+                    253,
+                    "boy"
+                ],
+                [
+                    254,
+                    "were"
+                ],
+                [
+                    255,
+                    "gone"
+                ],
+                [
+                    256,
+                    "."
+                ],
+                [
+                    257,
+                    "only"
+                ],
+                [
+                    258,
+                    "mr"
+                ],
+                [
+                    259,
+                    "."
+                ],
+                [
+                    260,
+                    "al"
+                ],
+                [
+                    261,
+                    "##win"
+                ],
+                [
+                    262,
+                    "remained"
+                ],
+                [
+                    263,
+                    ","
+                ],
+                [
+                    264,
+                    "smiling"
+                ],
+                [
+                    265,
+                    "faintly"
+                ],
+                [
+                    266,
+                    ","
+                ],
+                [
+                    267,
+                    "as"
+                ],
+                [
+                    268,
+                    "though"
+                ],
+                [
+                    269,
+                    "another"
+                ],
+                [
+                    270,
+                    "destiny"
+                ],
+                [
+                    271,
+                    "had"
+                ],
+                [
+                    272,
+                    "just"
+                ],
+                [
+                    273,
+                    "begun"
+                ],
+                [
+                    274,
+                    "."
+                ]
+            ]
+        },
+        "timestamp": "2025-08-24 20:45:17"
+    }
+]

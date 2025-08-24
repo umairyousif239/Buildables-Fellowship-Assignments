@@ -1,4 +1,5 @@
 import streamlit as st
+from utils.export_helpers import save_results
 from utils.language_helpers import detect_language
 from utils.llm_helpers import summarize, estimate_cost
 from utils.tokenizer_helpers import tokenize, visualize_boundaries, token_count
@@ -61,3 +62,17 @@ if st.button("Summarize with LLM"):
             st.write(f"**Unique Tokens:** {bert_tokens['unique_tokens']}")
             st.write(f"**Average Token Length:** {bert_tokens['avg_token_length']}")
             st.markdown(visualize_boundaries(bert_tokens["boundaries"]))
+        
+        save_results({
+        "model": model_choice,
+        "input_text": text,
+        "summary": summary,
+        "language": lang_info["language"],
+        "probabilities": lang_info["probabilities"],
+        "input_tokens": input_tokens,
+        "output_tokens": output_tokens,
+        "estimated_cost": cost,
+        "gpt_tokens": gpt_tokens,
+        "bert_tokens": bert_tokens
+        }, file_path="data/results/result.json")
+

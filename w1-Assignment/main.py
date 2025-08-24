@@ -1,3 +1,4 @@
+from utils.export_helpers import save_results
 from utils.language_helpers import detect_language
 from utils.llm_helpers import summarize, estimate_cost
 from utils.tokenizer_helpers import token_count, tokenize, visualize_boundaries
@@ -37,6 +38,20 @@ if __name__ == "__main__":
     input_tokens = token_count(sample_text)
     output_tokens = token_count(summary)
     est_cost = estimate_cost(input_tokens, output_tokens, model_choice)
+    
+    run_data = {
+        "model": model_choice,
+        "input_text": sample_text,
+        "summary": summary,
+        "language": lang_info["language"],
+        "probabilities": lang_info["probabilities"],
+        "input_tokens": input_tokens,
+        "output_tokens": output_tokens,
+        "estimated_cost": est_cost
+    }
+
+    # Save to JSON
+    save_results(run_data)
 
     # Print results
     print("\n=== SUMMARY ===")
