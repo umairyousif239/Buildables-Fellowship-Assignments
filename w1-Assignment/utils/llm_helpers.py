@@ -6,24 +6,22 @@ from typing import Dict, Any
 from dotenv import load_dotenv
 
 import google.generativeai as genai
-from openai import OpenAI           # DeepSeek uses OpenAI-compatible API
-from project_config import GEMINI_API_KEY, DEEPSEEK_API_KEY
+import anthropic
+from project_config import GEMINI_API_KEY, ANTHROPIC_API_KEY
 
 # API CLIENTS
 
 # Gemini
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
 
-# DeepSeek
-deepseek_client = OpenAI(
-    api_key=os.getenv("DEEPSEEK_API_KEY"),
-    base_url="https://api.deepseek.com"
-)
+# Anthropic Claude
+claude_client = anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
+
 
 # MODEL COSTS (example values, replace with actual pricing from docs)
 MODEL_COSTS = {
     "gemini": {"input": 0.0005, "output": 0.0015}, # per 1k tokens
-    "deepseek": {"input": 0.0003, "output": 0.0009},
+    "claude": {"input": 0.0003, "output": 0.0009},
 }
 
 # Helper: Safe API Call
@@ -50,17 +48,15 @@ def summarize_with_gemini(text: str) -> str:
     return safe_api_call(_call)
 
 
-def summarize_with_deepseek(text: str) -> str:
-    """Summarize text using DeepSeek API."""
+def summarize_with_claude(text: str) -> str:
+    """Summarize text using Anthropic Claude."""
     def _call():
-        response = deepseek_client.chat.completions.create(
-            model="deepseek-chat",
-            messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": f"Summarize this text clearly:\n\n{text}"}
-            ]
+        response = claude_client.messages.create(
+            model="claude-3-5-sonnet-latest",  # or pick another model
+            max_tokens=500,
+            messages=[{"role": "user", "content": text}],
         )
-        return response.choices[0].message.content
+        return response.completion if hasattr(response, "completion") else response.content
 
     return safe_api_call(_call)
 
@@ -69,8 +65,8 @@ def summarize(text: str, model: str) -> str:
     """Route summarization request to the right model."""
     if model == "gemini":
         return summarize_with_gemini(text)
-    elif model == "deepseek":
-        return summarize_with_deepseek(text)
+    elif model == "claude":
+        return summarize_with_claude(text)
     else:
         raise ValueError(f"Unsupported model: {model}")
 

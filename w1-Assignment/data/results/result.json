@@ -1,0 +1,15 @@
+[
+    {
+        "model": "gemini",
+        "input_text": "Title: \u201cAI-Powered Drone Swarms Tested for Disaster Relief\u201dIn a groundbreaking demonstration last week, a team of researchers from the University of Tokyo unveiled an artificial intelligence\u2013powered drone swarm designed to support disaster relief efforts. The system, which uses machine learning to coordinate the movements of up to 100 drones simultaneously, has the potential to revolutionize how emergency teams respond to earthquakes, floods, and wildfires.The test took place in a simulated earthquake zone, where collapsed buildings and blocked roads were recreated in a controlled environment. Within minutes, the drones mapped the affected area, identified trapped survivors using thermal imaging, and relayed data to ground-based rescue teams. The coordination was managed without human intervention, showcasing the AI\u2019s ability to adapt dynamically to unpredictable conditions.Professor Kenji Sato, the project\u2019s lead researcher, emphasized the importance of speed in disaster scenarios. \u201cEvery minute counts. Our system can rapidly assess dangerous environments where sending humans first would be risky,\u201d he explained.Beyond search-and-rescue, the drones are capable of delivering lightweight medical supplies and communication devices. In rural or mountainous areas where infrastructure may collapse, this capability could be lifesaving.While the results are promising, concerns remain about privacy, security, and misuse. Experts warn that swarm technology could also be adapted for military purposes. The research team has reassured the public that their system is strictly intended for humanitarian use.Governments in Japan, Indonesia, and Chile\u2014countries frequently affected by natural disasters\u2014are already in talks to pilot the technology. If adopted, AI-powered drone swarms may soon become as essential as fire trucks and ambulances in disaster response.",
+        "summary": "Researchers at the University of Tokyo successfully tested an AI-powered drone swarm for disaster relief.  The system, capable of coordinating up to 100 drones simultaneously, autonomously mapped a simulated disaster zone, located survivors using thermal imaging, and relayed information to rescue teams.  While promising for search and rescue and delivering supplies, concerns about potential misuse exist.  Several disaster-prone governments are already exploring its implementation.\n",
+        "language": "en",
+        "probabilities": {
+            "en": 0.999998767609897
+        },
+        "input_tokens": 342,
+        "output_tokens": 82,
+        "estimated_cost": 0.000294,
+        "timestamp": "2025-08-24 21:20:33"
+    }
+]

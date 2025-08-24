@@ -1,6 +1,6 @@
 openai
 transformers
-deepseek
+anthropic
 google-generativeai
 streamlit
 langdetect

@@ -8,8 +8,8 @@ if __name__ == "__main__":
     
     # Asks which model to use
     model_choice = ""
-    while model_choice.lower() not in ["gemini", "deepseek"]:
-        model_choice = input("Choose a model (gemini / deepseek): ").strip().lower()
+    while model_choice.lower() not in ["gemini", "claude"]:
+        model_choice = input("Choose a model (gemini / claude): ").strip().lower()
 
     # Asks for input text
     sample_text = input("\nEnter a paragraph to summarize:\n")
