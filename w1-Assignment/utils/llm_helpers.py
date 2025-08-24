@@ -22,7 +22,7 @@ deepseek_client = OpenAI(
 
 # MODEL COSTS (example values, replace with actual pricing from docs)
 MODEL_COSTS = {
-    "gemini": {"input": 0.0005, "output": 0.0015},    # per 1k tokens
+    "gemini": {"input": 0.0005, "output": 0.0015}, # per 1k tokens
     "deepseek": {"input": 0.0003, "output": 0.0009},
 }
 

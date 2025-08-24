@@ -3,3 +3,4 @@ transformers
 nltk
 deepseek
 google-generativeai
+streamlit

@@ -1,0 +1,8 @@
+{
+    "model": "gemini",
+    "input_file": "data/sample_texts/news.txt",
+    "summary": "AI is revolutionizing various sectors by automating tasks and enhancing decision-making.\n",
+    "input_tokens": 16,
+    "output_tokens": 17,
+    "estimated_cost": 3.4e-05
+}
