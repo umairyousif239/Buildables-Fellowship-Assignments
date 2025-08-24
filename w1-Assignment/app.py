@@ -22,6 +22,7 @@ if st.button("Summarize with LLM"):
         st.write(f"**Detected Language:** {lang_info['language']}")
         if lang_info["probabilities"]:
             st.write("**Probabilities:**", lang_info["probabilities"])
+
         # Summarization
         summary = summarize(text, model_choice)
         st.subheader("📄 Summary")
