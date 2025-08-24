@@ -49,7 +49,8 @@ def tokenize(text: str, model: str = "gpt") -> Dict:
 
 def token_count(text: str, model: str = "gpt") -> int:
     """Return number of tokens for a given text."""
-    return len(tokenize(text, model))
+    result = tokenize(text, model=model)
+    return result["token_count"]
 
 def compare_tokenization(text: str) -> dict:
     """Compare GPT vs BERT tokenization of the same text."""

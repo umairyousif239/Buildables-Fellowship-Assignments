@@ -1,62 +1,29 @@
-import argparse
-import json
+from utils.language_helpers import detect_language
 from utils.llm_helpers import summarize, estimate_cost
 from utils.tokenizer_helpers import token_count, tokenize, visualize_boundaries
 
-
-def main():
-    parser = argparse.ArgumentParser(description="Text Analysis Tool (Gemini + DeepSeek)")
-    parser.add_argument("--task", choices=["summarize"], required=True,
-                        help="Task to perform (currently only: summarize)")
-    parser.add_argument("--model", choices=["gemini", "deepseek"], required=True,
-                        help="Which model to use")
-    parser.add_argument("--file", type=str, required=True,
-                        help="Path to input text file")
-    parser.add_argument("--save", action="store_true",
-                        help="Save results to JSON file in data/results/")
-
-    args = parser.parse_args()
-
-    # Load input text
-    with open(args.file, "r", encoding="utf-8") as f:
-        text = f.read()
-
-    if args.task == "summarize":
-        print(f"\n📝 Running summarization with {args.model}...\n")
-        summary = summarize(text, args.model)
-
-        # Token counts
-        input_tokens = token_count(text)
-        output_tokens = token_count(summary)
-        est_cost = estimate_cost(input_tokens, output_tokens, args.model)
-
-        # Print results
-        print("=== SUMMARY ===")
-        print(summary)
-        print("\n=== STATS ===")
-        print(f"Input tokens: {input_tokens}")
-        print(f"Output tokens: {output_tokens}")
-        print(f"Estimated cost: ${est_cost}")
-
-        # Save results
-        if args.save:
-            results = {
-                "model": args.model,
-                "input_file": args.file,
-                "summary": summary,
-                "input_tokens": input_tokens,
-                "output_tokens": output_tokens,
-                "estimated_cost": est_cost,
-            }
-            out_path = f"data/results/{args.model}_summary.json"
-            with open(out_path, "w", encoding="utf-8") as out_f:
-                json.dump(results, out_f, indent=4, ensure_ascii=False)
-            print(f"\n✅ Results saved to {out_path}")
-
-
 if __name__ == "__main__":
-    sample_text = input("Enter a paragraph to summarize.\n")
+    print("=== Text Analysis Tool ===")
     
+    # 🔹 Ask which model to use
+    model_choice = ""
+    while model_choice.lower() not in ["gemini", "deepseek"]:
+        model_choice = input("Choose a model (gemini / deepseek): ").strip().lower()
+
+    # 🔹 Ask for input text
+    sample_text = input("\nEnter a paragraph to summarize:\n")
+
+    # 🔹 Language Detection
+    lang_info = detect_language(sample_text)
+    print("\n=== LANGUAGE DETECTION ===")
+    print(f"Detected: {lang_info['language']}")
+    print("Probabilities:", lang_info["probabilities"])
+
+    # 🔹 Summarization
+    print(f"\n📝 Running summarization with {model_choice}...\n")
+    summary = summarize(sample_text, model_choice)
+
+    # 🔹 Tokenization with GPT and BERT
     for model in ["gpt", "bert"]:
         result = tokenize(sample_text, model=model)
         print(f"\n=== {model.upper()} Tokenization ===")
@@ -65,3 +32,16 @@ if __name__ == "__main__":
         print("Unique Tokens:", result["unique_tokens"])
         print("Avg Token Length:", result["avg_token_length"])
         print("Boundaries:", visualize_boundaries(result["boundaries"]))
+
+    # 🔹 Token counts + cost
+    input_tokens = token_count(sample_text)
+    output_tokens = token_count(summary)
+    est_cost = estimate_cost(input_tokens, output_tokens, model_choice)
+
+    # 🔹 Print results
+    print("\n=== SUMMARY ===")
+    print(summary)
+    print("\n=== STATS ===")
+    print(f"Input tokens: {input_tokens}")
+    print(f"Output tokens: {output_tokens}")
+    print(f"Estimated cost: ${est_cost}")
