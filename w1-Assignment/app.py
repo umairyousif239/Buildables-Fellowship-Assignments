@@ -11,7 +11,7 @@ st.title("🧠 LLM Summarizer + Tokenization Explorer")
 text = st.text_area("Enter text to summarize")
 
 # Model selection (Gemini or Claude)
-model_choice = st.selectbox("Choose a model", ["Google Gemini", "Anthropic Claude"])
+model_choice = st.selectbox("Choose a model", ["gemini", "claude"])
 
 if st.button("Summarize with LLM"):
     if not text.strip():
