@@ -4,3 +4,5 @@ deepseek
 google-generativeai
 streamlit
 langdetect
+json
+datetime
