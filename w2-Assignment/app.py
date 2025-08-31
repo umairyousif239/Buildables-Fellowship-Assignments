@@ -32,7 +32,7 @@ def exportChatHistoryAsText():
         elif isinstance(message, HumanMessage):
             export_string += f"You: {message.content}\n"
         elif isinstance(message, AIMessage):
-            export_string =+ f"Assistant: {message.content}\n"
+            export_string += f"Assistant: {message.content}\n"
     return export_string
 
 # Streamlit app configuration
@@ -133,6 +133,14 @@ if user_query := st.chat_input("Type your message here.", key="user_input"):
             formatted_prompt = ' '.join(
                 str(msg.content) for msg in st.session_state.chat_history
             )
+            if st.session_state.model.gemini_api is None:
+                ai_response_text = "Error: Gemini API key is not set. Please check your config.py or environment variables."
+            else:
+                ai_response_text = st.session_state.model.gemini_chat_models(formatted_prompt)
+            
+            st.session_state.chat_history.append(AIMessage(content=ai_response_text))
+            with st.chat_message("assistant"):
+                st.write(ai_response_text)
         except Exception as e:
             st.error(f"Error from the AI model: {e}")
             if len(st.session_state.chat_history) > 1:
