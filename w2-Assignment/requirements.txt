@@ -1,0 +1,9 @@
+google-generativeai
+transformers
+nltk
+streamlit
+pandas
+matplotlib
+torch
+openai
+python-dotenv
