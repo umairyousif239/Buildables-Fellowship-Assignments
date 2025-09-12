@@ -1,6 +1,6 @@
 from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
 from model_core import systemPromptContentLoader
-from utils.chat_model import ChatModel, get_available_personas, export_chat_history_as_text
+from utils.chat_model import ChatModel
 import streamlit as st
 import config
 import os
