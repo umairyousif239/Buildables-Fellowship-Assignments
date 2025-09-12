@@ -1,6 +1,6 @@
 from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
 from model_core import systemPromptContentLoader
-from utils.chat_model import ChatModel
+from utils.chat_model import ChatModel, get_available_personas, export_chat_history_as_text
 import streamlit as st
 import config
 import os
@@ -13,7 +13,7 @@ if not os.path.exists(_PROMPTS_ABS_DIR_):
     st.warning(f"Created missing prompt directory: {_PROMPTS_ABS_DIR_}")
 
 # Get available personas
-def getAvailablePersonas() -> list[str]:
+def get_available_personas() -> list[str]:
     """
     Scans the prompts directory and returns a list of available persona names.
     """
@@ -21,7 +21,7 @@ def getAvailablePersonas() -> list[str]:
     return [os.path.splitext(f)[0].replace('_', ' ').title() for f in persona_files]
 
 # Export chat history as text
-def exportChatHistoryAsText():
+def export_chat_history_as_text():
     """
     Formats the chat history for export as plain text.
     """
@@ -62,9 +62,15 @@ if st.session_state.model.gemini_api is None:
 st.sidebar.header("Chat Settings")
 
 # Persona Selector
-available_personas = getAvailablePersonas()
-default_persona_index = available_personas.index("Professional Assistant") if "Professional Assistant" in available_personas else (0 if available_personas else -1)
+available_personas = get_available_personas()
+if "Professional Assistant" in available_personas:
+    default_persona_index = available_personas.index("Professional Assistant")
+elif available_personas:
+    default_persona_index = 0
+else:
+    default_persona_index = -1
 
+# Persona Fallback
 if default_persona_index == -1:
     st.warning("No persona prompt files found. using default assistant.")
     selected_persona_display_name = "Default Assistant"
@@ -102,7 +108,7 @@ if st.sidebar.button("Clear Chat History", key="clear_chat_button"):
 # Export chat history
 st.sidebar.download_button(
     label="Export Chat History",
-    data=exportChatHistoryAsText(),
+    data=export_chat_history_as_text(),
     file_name="chat_history.txt",
     mime="text/plain",
     key="export_chat_button"
@@ -128,7 +134,7 @@ if user_query := st.chat_input("Type your message here.", key="user_input"):
     with st.chat_message("user"):
         st.write(user_query)
 
-    with st.spinner(f"Thinking..."):
+    with st.spinner("Thinking..."):
         try:
             formatted_prompt = ' '.join(
                 str(msg.content) for msg in st.session_state.chat_history
