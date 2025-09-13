@@ -117,22 +117,22 @@ st.sidebar.download_button(
 # Footer
 st.sidebar.markdown("---")
 st.sidebar.markdown("Developed by [Umair Yousif](https://www.linkedin.com/in/umairyousif) | [GitHub](https://github.com/umairyousif239)")
-st.sidebar.markdown("Powered by [Google Gemini-2.0-flash](https://developers.generativeai.google/products/gemini) | [Buildables Fellowship](https://buildables.io/fellowship)")
+st.sidebar.markdown("Powered by [Google Gemini-2.0-flash](https://developers.generativeai.google/products/gemini) | [Buildables Fellowship](https://buildables.dev/#/fellowship)")
 
 # Chat History
 for message in st.session_state.chat_history:
     if isinstance(message, HumanMessage):
         with st.chat_message("user"):
-            st.write(message.content)
+            st.write(message.content.replace("$","\$"))
     elif isinstance(message, AIMessage):
         with st.chat_message("assistant"):
-            st.write(message.content)
+            st.write(message.content.replace("$","\$"))
 
 # User Input
 if user_query := st.chat_input("Type your message here.", key="user_input"):
     st.session_state.chat_history.append(HumanMessage(content=user_query))
     with st.chat_message("user"):
-        st.write(user_query)
+        st.write(user_query.replace("$","\$"))
 
     with st.spinner("Thinking..."):
         try:
@@ -146,7 +146,7 @@ if user_query := st.chat_input("Type your message here.", key="user_input"):
             
             st.session_state.chat_history.append(AIMessage(content=ai_response_text))
             with st.chat_message("assistant"):
-                st.write(ai_response_text)
+                st.write(ai_response_text.replace("$","\$"))
         except Exception as e:
             st.error(f"Error from the AI model: {e}")
             if len(st.session_state.chat_history) > 1:
