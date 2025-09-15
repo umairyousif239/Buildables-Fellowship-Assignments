@@ -1,6 +1,6 @@
 # Evaluation Rubrics
 
-The table below will be a showcase of how the model performs when given differnt types of prompts on the same problem. 
+The table below will be a showcase of how the model performs when given different types of prompts on the same problem. 
 
 | No. | Task | Zero-Shot | Few-Shot | CoT | Correctness | Clarity | Completeness | Conciseness | Scoring |
 | --------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- | --------- |
