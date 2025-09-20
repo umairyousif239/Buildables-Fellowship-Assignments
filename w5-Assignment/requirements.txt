@@ -1,0 +1,25 @@
+# Core LLM & Agents
+langchain
+langchain-google-genai
+google-generativeai
+
+# Vector Storage For Journal Entries
+faiss-cpu
+
+# Embedding and NLP Tools
+sentence-transformers
+nltk
+textblob
+
+# Frontend and Backend
+streamlit
+flask
+
+# Data Handling and Visualization
+pandas
+matplotlib
+
+# Utilities
+python-dotenv
+tqdm
+rich
