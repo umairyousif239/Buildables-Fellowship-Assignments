@@ -1,8 +1,13 @@
 # Core LLM & Agents
 langchain
 langchain-community
-langchain-google-genai
+langchain_huggingface
 google-generativeai
+torch
+torchvision
+torchaudio
+huggingface-hub
+transformers
 
 # Vector Storage For Journal Entries
 faiss-cpu
