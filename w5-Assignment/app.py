@@ -6,7 +6,9 @@ from src.utils.db import create_db, add_entry
 from src.utils.journal_store import init_db, upsert_entry, get_entry_by_date, list_entries, sentiment_trend
 from src.agent import reflect
 
+# -----------------------------
 # Initialize vector DB and SQLite
+# -----------------------------
 if "db" not in st.session_state:
     if embeddings is None:
         st.error("Embeddings not initialized. Please check your Hugging Face API key and configuration.")

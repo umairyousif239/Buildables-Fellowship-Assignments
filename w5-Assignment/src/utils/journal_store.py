@@ -6,11 +6,15 @@ from typing import Optional, List, Dict, Any
 DB_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), "data")
 DB_PATH = os.path.join(DB_DIR, "journal.db")
 
-
+# -----------------------------
+# Ensure the data directory exists.
+# -----------------------------
 def _ensure_dir():
     os.makedirs(DB_DIR, exist_ok=True)
 
-
+# -----------------------------
+# Create the SQLite DB and entries table if missing; apply best-effort migrations.
+# -----------------------------
 def init_db() -> None:
     """Create the journal database and table if they don't exist."""
     _ensure_dir()
@@ -29,8 +33,10 @@ def init_db() -> None:
         )
         conn.commit()
 
+        # -----------------------------
         # Simple migration if existing table lacks 'reflection'
         # Simple migrations (best effort)
+        # -----------------------------
         for col_def in [
             ("reflection", "TEXT"),
             ("sentiment_score", "REAL"),
@@ -66,7 +72,9 @@ def upsert_entry(
         )
         conn.commit()
 
-
+# -----------------------------
+# Fetch a single entry by date (YYYY-MM-DD) or return None.
+# -----------------------------
 def get_entry_by_date(date_str: str) -> Optional[Dict[str, Any]]:
     """Fetch an entry by date. Returns dict or None."""
     if not os.path.exists(DB_PATH):
@@ -80,7 +88,9 @@ def get_entry_by_date(date_str: str) -> Optional[Dict[str, Any]]:
         row = cur.fetchone()
         return dict(row) if row else None
 
-
+# -----------------------------
+# List up to 'limit' recent entries, newest first.
+# -----------------------------
 def list_entries(limit: int = 10) -> List[Dict[str, Any]]:
     """List recent entries, newest first."""
     if not os.path.exists(DB_PATH):
@@ -93,7 +103,9 @@ def list_entries(limit: int = 10) -> List[Dict[str, Any]]:
         )
         return [dict(r) for r in cur.fetchall()]
 
-
+# -----------------------------
+# Return a list of {date, sentiment, sentiment_score} for the last N days.
+# -----------------------------
 def sentiment_trend(days: int = 14) -> List[Dict[str, Any]]:
     """Return date and sentiment_score for last N days (if present)."""
     if not os.path.exists(DB_PATH):

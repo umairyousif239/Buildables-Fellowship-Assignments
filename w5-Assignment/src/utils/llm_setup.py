@@ -38,6 +38,9 @@ try:
         },
     )
 
+    # -----------------------------
+    # Call Gemini and return plain text for a given prompt.
+    # -----------------------------
     def llm(prompt: str):
         """Simple callable that returns plain text from Gemini."""
         resp = _gemini_model.generate_content(prompt)

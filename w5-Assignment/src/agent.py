@@ -6,12 +6,16 @@ from src.tools.sentiment import analyze_sentiment
 
 PREFERRED_KEYS = ("generated_text", "text", "content", "response", "message")
 
+# -----------------------------
+# Return the value if it is a non-empty string; otherwise None.
+# -----------------------------
 def _coerce_str(value):
-    """Return value if it's a non-empty string; otherwise return None."""
     return value if isinstance(value, str) and value.strip() else None
 
+# -----------------------------
+# Pull the first meaningful string from a dict, preferring known keys.
+# -----------------------------
 def _extract_from_dict(d):
-    """Extract the first meaningful string from a dict, preferring known keys."""
     for k in PREFERRED_KEYS:
         v = _coerce_str(d.get(k))
         if v is not None:
@@ -22,6 +26,9 @@ def _extract_from_dict(d):
             return sv
     return None
 
+# -----------------------------
+# Normalize various LLM response shapes into a plain string.
+# -----------------------------
 def extract_text(resp):
     """
     Normalize various LLM response formats into a plain string.
@@ -35,6 +42,9 @@ def extract_text(resp):
         return extract_text(resp[0]) if len(resp) > 0 else str(resp)
     return str(resp)
 
+# -----------------------------
+# Join retrieved past entry texts into a context block.
+# -----------------------------
 def build_context(past_entries):
     """
     Build a newline-joined context from past entries search results.
@@ -44,6 +54,9 @@ def build_context(past_entries):
     except Exception:
         return ""
 
+# -----------------------------
+# Build a concise journaling prompt with input, sentiment, and context.
+# -----------------------------
 def build_prompt(user_input: str, sentiment: str, context: str) -> str:
     """
     Construct the journaling assistant prompt.
@@ -60,6 +73,9 @@ def build_prompt(user_input: str, sentiment: str, context: str) -> str:
     Keep it brief and journal-friendly: 3–4 sentences, under 90 words.
     """
 
+# -----------------------------
+# Generate a brief reflection: analyze sentiment, retrieve context, prompt LLM.
+# -----------------------------
 def reflect(db, user_input: str) -> str:
     """
     Reflective journaling assistant.
