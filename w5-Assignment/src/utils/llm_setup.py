@@ -14,7 +14,7 @@ from load_config import GEMINI_API_KEY
 embeddings = None
 try:
     embeddings = HuggingFaceEmbeddings(
-        model_name="sentence-transformers/all-MiniLM-L6-v2"  # small, free-tier
+        model_name="sentence-transformers/all-MiniLM-L6-v2"
     )
     print("[INFO] Hugging Face embeddings initialized successfully.")
 except Exception as e:
