@@ -7,9 +7,11 @@ from src.tools.sentiment import analyze_sentiment
 PREFERRED_KEYS = ("generated_text", "text", "content", "response", "message")
 
 def _coerce_str(value):
+    """Return value if it's a non-empty string; otherwise return None."""
     return value if isinstance(value, str) and value.strip() else None
 
 def _extract_from_dict(d):
+    """Extract the first meaningful string from a dict, preferring known keys."""
     for k in PREFERRED_KEYS:
         v = _coerce_str(d.get(k))
         if v is not None:
