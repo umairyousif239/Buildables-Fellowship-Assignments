@@ -35,6 +35,7 @@ The problem that I intended to solve was how most personalized journals are kind
 
 ## Setup Instructions
 [Step-by-step setup guide]
+All you need to do to get this to run is run ```pip install -r requirements.txt``` first to install all the necessary libraries. After that, just run the `streamlit run app.py` in the terminal to get the app running. The UI is super user-friendly as all the features are divided in to proper tabs.
 
 ## Demo Video
 [Link to your video demonstration]
