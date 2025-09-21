@@ -108,7 +108,7 @@ with tab3:
     # Compute once for both Q&A and chart
     trend = sentiment_trend(days=14)
 
-    # 1) Analytics Q&A first
+    # 1) Analytics Q&A
     st.subheader("Ask about your mood (no AI)")
     q_col1, q_col2 = st.columns([3, 1])
     with q_col1:

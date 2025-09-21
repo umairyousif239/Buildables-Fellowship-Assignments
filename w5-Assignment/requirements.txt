@@ -1,32 +1,20 @@
-# Core LLM & Agents
+# Core LLM & Agents (used directly in code)
 langchain
 langchain-community
-langchain_huggingface
+langchain-huggingface
 google-generativeai
-torch
-torchvision
-torchaudio
-huggingface-hub
-transformers
 
-# Vector Storage For Journal Entries
+# Vector storage for journal entries
 faiss-cpu
 
-# Embedding and NLP Tools
+# Embeddings and NLP
 sentence-transformers
 nltk
-textblob
+torch
 
-# Frontend and Backend
+# Frontend / UI
 streamlit
-flask
-
-# Data Handling and Visualization
 pandas
-matplotlib
 
 # Utilities
 python-dotenv
-tqdm
-rich
-config

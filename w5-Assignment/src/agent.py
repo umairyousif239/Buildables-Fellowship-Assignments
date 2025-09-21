@@ -4,6 +4,60 @@ from src.utils.llm_setup import llm
 from src.utils.db import search
 from src.tools.sentiment import analyze_sentiment
 
+PREFERRED_KEYS = ("generated_text", "text", "content", "response", "message")
+
+def _coerce_str(value):
+    return value if isinstance(value, str) and value.strip() else None
+
+def _extract_from_dict(d):
+    for k in PREFERRED_KEYS:
+        v = _coerce_str(d.get(k))
+        if v is not None:
+            return v
+    for v in d.values():
+        sv = _coerce_str(v)
+        if sv is not None:
+            return sv
+    return None
+
+def extract_text(resp):
+    """
+    Normalize various LLM response formats into a plain string.
+    """
+    if isinstance(resp, str):
+        return resp
+    if isinstance(resp, dict):
+        v = _extract_from_dict(resp)
+        return v if v is not None else str(resp)
+    if isinstance(resp, (list, tuple)):
+        return extract_text(resp[0]) if len(resp) > 0 else str(resp)
+    return str(resp)
+
+def build_context(past_entries):
+    """
+    Build a newline-joined context from past entries search results.
+    """
+    try:
+        return "\n".join([doc[0].page_content for doc in past_entries])  # doc[0] is Document
+    except Exception:
+        return ""
+
+def build_prompt(user_input: str, sentiment: str, context: str) -> str:
+    """
+    Construct the journaling assistant prompt.
+    """
+    return f"""
+    You are a reflective journaling assistant.
+    User just wrote: "{user_input}".
+    Sentiment detected: {sentiment}.
+    Here are related past entries:
+    {context}
+
+    Based on this, give an empathetic reflection.
+    Suggest patterns, insights, or advice if relevant.
+    Keep it brief and journal-friendly: 3–4 sentences, under 90 words.
+    """
+
 def reflect(db, user_input: str) -> str:
     """
     Reflective journaling assistant.
@@ -18,47 +72,15 @@ def reflect(db, user_input: str) -> str:
 
     # Step 2: Retrieve similar past entries
     past_entries = search(db, user_input, k=3)
-    context = "\n".join([doc[0].page_content for doc in past_entries])  # doc[0] is Document
+    context = build_context(past_entries)
 
     # Step 3: Build prompt
-    prompt = f"""
-    You are a reflective journaling assistant.
-    User just wrote: "{user_input}".
-    Sentiment detected: {sentiment}.
-    Here are related past entries:
-    {context}
-
-    Based on this, give an empathetic reflection.
-    Suggest patterns, insights, or advice if relevant.
-    Keep it brief and journal-friendly: 3–4 sentences, under 90 words.
-    """
+    prompt = build_prompt(user_input, sentiment, context)
 
     # Step 4: Get response from Hugging Face LLM
     try:
         raw_response = llm(prompt)
         print(f"[DEBUG] Raw LLM response: {raw_response}")  # For debugging
-        # Handle different output formats
-        def extract_text(resp):
-            if isinstance(resp, list) and len(resp) > 0:
-                item = resp[0]
-                if isinstance(item, dict):
-                    for key in item:
-                        if isinstance(item[key], str):
-                            return item[key]
-                    return str(item)
-                elif isinstance(item, str):
-                    return item
-                else:
-                    return str(item)
-            elif isinstance(resp, dict):
-                for key in resp:
-                    if isinstance(resp[key], str):
-                        return resp[key]
-                return str(resp)
-            elif isinstance(resp, str):
-                return resp
-            else:
-                return str(resp)
         return extract_text(raw_response)
     except Exception as e:
         # Catch errors like API key issues
