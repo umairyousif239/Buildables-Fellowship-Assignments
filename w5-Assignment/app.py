@@ -6,11 +6,6 @@ from src.utils.db import create_db, add_entry
 from src.utils.journal_store import init_db, upsert_entry, get_entry_by_date, list_entries, sentiment_trend
 from src.agent import reflect
 
-headers = {
-    "authorization": st.secrets["GEMINI_API_KEY", "HUGGINGFACE_API_KEY"],
-    "content-type": "application/json"
-}
-
 # -----------------------------
 # Initialize vector DB and SQLite
 # -----------------------------
