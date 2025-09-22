@@ -8,12 +8,6 @@ from src.utils.db import create_db, add_entry
 from src.utils.journal_store import init_db, upsert_entry, get_entry_by_date, list_entries, sentiment_trend
 from src.agent import reflect
 
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
-from load_config import Config
-
-st.write("Using GEMINI_API_KEY:", Config.GEMINI_API_KEY[:5] + "*****")
-st.write("Using HUGGINGFACE_API_KEY:", Config.HUGGINGFACE_API_KEY[:5] + "*****")
-
 # -----------------------------
 # Initialize vector DB and SQLite
 # -----------------------------
