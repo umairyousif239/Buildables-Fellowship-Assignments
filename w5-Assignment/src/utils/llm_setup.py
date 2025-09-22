@@ -29,7 +29,7 @@ llm = None
 try:
     genai.configure(api_key=Config.GEMINI_API_KEY)
     _gemini_model = genai.GenerativeModel(
-        model_name="gemini-1.5-flash",
+        model_name="gemini-2.0-flash",
         generation_config={
             "max_output_tokens": 120,
             "temperature": 0.7,
