@@ -7,8 +7,8 @@ load_dotenv()
 
 class Config:
     # Try secrets first, then fallback to .env
-    GEMINI_API_KEY = st.secrets.get("GEMINI_API_KEY") or os.getenv("GEMINI_API_KEY")
-    HUGGINGFACE_API_KEY = st.secrets.get("HUGGINGFACE_API_KEY") or os.getenv("HUGGINGFACE_API_KEY")
+    GEMINI_API_KEY = st.secrets["default"].get("GEMINI_API_KEY") or os.getenv("GEMINI_API_KEY")
+    HUGGINGFACE_API_KEY = st.secrets["default"].get("HUGGINGFACE_API_KEY") or os.getenv("HUGGINGFACE_API_KEY")
 
     # Debug messages
     if GEMINI_API_KEY:
