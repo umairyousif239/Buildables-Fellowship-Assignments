@@ -3,6 +3,7 @@ langchain
 langchain-community
 langchain-huggingface
 google-generativeai
+tf-keras==2.20.1
 
 # Vector storage for journal entries
 faiss-cpu
