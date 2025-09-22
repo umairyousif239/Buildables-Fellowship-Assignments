@@ -5,7 +5,7 @@ import sys
 from langchain_huggingface.embeddings import HuggingFaceEmbeddings
 import google.generativeai as genai
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
-from load_config import GEMINI_API_KEY
+from load_config import Config
 
 
 # -----------------------------
@@ -27,7 +27,7 @@ except Exception as e:
 # -----------------------------
 llm = None
 try:
-    genai.configure(api_key=GEMINI_API_KEY)
+    genai.configure(api_key=Config.GEMINI_API_KEY)
     _gemini_model = genai.GenerativeModel(
         model_name="gemini-1.5-flash",
         generation_config={
