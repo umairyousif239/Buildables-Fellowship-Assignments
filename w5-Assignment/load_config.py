@@ -4,8 +4,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 class Config:
-    GEMINI_API_KEY = st.secrets.get("API_KEY", os.getenv("GEMINI_API_KEY"))
-    HUGGINGFACE_API_KEY = st.secrets.get("DB_KEY", os.getenv("HUGGINGFACE_API_KEY"))
+    GEMINI_API_KEY = st.secrets.get("GEMINI_API_KEY", os.getenv("GEMINI_API_KEY"))
+    HUGGINGFACE_API_KEY = st.secrets.get("HUGGINGFACE_API_KEY", os.getenv("HUGGINGFACE_API_KEY"))
     
     if not GEMINI_API_KEY:
         raise ValueError("Missing GEMINI_API_KEY in .env")

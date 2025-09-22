@@ -9,10 +9,10 @@ from src.utils.journal_store import init_db, upsert_entry, get_entry_by_date, li
 from src.agent import reflect
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../../")))
-from load_config import GEMINI_API_KEY, HUGGINGFACE_API_KEY
+from load_config import Config
 
-st.write("Using GEMINI_API_KEY:", GEMINI_API_KEY.API_KEY[:5] + "*****")
-st.write("Using HUGGINGFACE_API_KEY:", HUGGINGFACE_API_KEY.API_KEY[:5] + "*****")
+st.write("Using GEMINI_API_KEY:", Config.GEMINI_API_KEY[:5] + "*****")
+st.write("Using HUGGINGFACE_API_KEY:", Config.HUGGINGFACE_API_KEY[:5] + "*****")
 
 # -----------------------------
 # Initialize vector DB and SQLite
