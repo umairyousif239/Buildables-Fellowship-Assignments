@@ -1,3 +1,3 @@
 .env
 __pycache__
-/data/journal.db
+journal.db
