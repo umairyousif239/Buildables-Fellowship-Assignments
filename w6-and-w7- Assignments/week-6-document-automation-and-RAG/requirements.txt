@@ -1,5 +1,9 @@
 pdfplumber
 langchain
-sentence-transformers
 faiss-cpu
 streamlit
+numpy
+pandas
+tqdm
+python-dotenv
+google-generativeai
