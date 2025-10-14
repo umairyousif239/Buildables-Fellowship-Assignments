@@ -1,13 +1,7 @@
-from utils.pdf_extraction_and_structure import extract_pdf_content
+import json
+from utils.pdf_structure import structure_extracted_data
 
 pdf_path = "C:/Users/umair/Desktop/Misc/Final Year Project Proposal/FYP Proposal (AI Surveillance System).pdf"
-data = extract_pdf_content(pdf_path)
+data = structure_extracted_data(pdf_path)
 
-print("Total pages with text:", len(data["text"]))
-print("Total tables extracted:", len(data["tables"]))
-print("Objects metadata for first page:", data["objects"][0])
-
-# Example: View a table
-if data["tables"]:
-    first_table = data["tables"][0]["table"]
-    print(first_table.head())
+print(json.dumps(data, indent=2, ensure_ascii=False))

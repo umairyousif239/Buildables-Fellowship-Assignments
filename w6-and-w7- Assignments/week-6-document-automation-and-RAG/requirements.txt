@@ -1,4 +1,6 @@
 pdfplumber
+tabula-py
+JPype1
 langchain
 faiss-cpu
 streamlit
