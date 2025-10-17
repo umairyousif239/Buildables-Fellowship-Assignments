@@ -1,4 +1,4 @@
-# IntelliDoc AI
+# DocWeave AI — “Weaving extraction, RAG, vision, and long-context into answers”
 
 A modular, Streamlit-based RAG pipeline for document Q&A with:
 - Reliable PDF extraction (Docling) plus extractor comparison (PyPDF2, pdfplumber, Docling)
