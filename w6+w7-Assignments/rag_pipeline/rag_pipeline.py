@@ -5,9 +5,8 @@ import hashlib
 import faiss
 import numpy as np
 from sentence_transformers import SentenceTransformer
-# Ensure the project root (parent of rag_pipeline) is on sys.path so load_config can be imported
-sys.path.append(os.path.dirname(os.path.dirname(__file__)))
-from load_config import GEMINI_API_KEY
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "../")))
+from configurations import GEMINI_API_KEY
 
 # Use google-generativeai (matches your installed package)
 import google.generativeai as genai
@@ -24,7 +23,7 @@ HASH_FILE = os.path.join(VECTOR_STORE_DIR, "data_hash.txt")
 # === INIT ===
 os.makedirs(VECTOR_STORE_DIR, exist_ok=True)
 genai.configure(api_key=GEMINI_API_KEY)
-model = genai.GenerativeModel("gemini-1.5-flash")
+model = genai.GenerativeModel("gemini-2.5-flash")
 embedder = SentenceTransformer("all-MiniLM-L6-v2")
 
 
