@@ -1,6 +1,7 @@
 from docling.document_converter import DocumentConverter
-import pandas as pd
 import os
+import base64
+import json
 
 # === CONFIG ===
 pdf_path = "C:/Users/umair/Desktop/Misc/Final Year Project Proposal/FYP Proposal (AI Surveillance System).pdf"
@@ -12,37 +13,69 @@ converter = DocumentConverter()
 result = converter.convert(pdf_path)
 doc = result.document
 
-# === 1. Save extracted text ===
-text_path = os.path.join(output_folder, "extracted_text.txt")
-with open(text_path, "w", encoding="utf-8") as f:
-    f.write("\n".join(getattr(t, "text", str(t)) for t in doc.texts))
-print(f"✅ Text content saved to {text_path}")
+# === 1. Extract text ===
+texts = [getattr(t, "text", str(t)) for t in doc.texts]
 
-# === 2. Extract tables and export to CSV ===
+# === 2. Extract tables ===
+tables = []
 for i, table in enumerate(doc.tables, start=1):
     df = table.export_to_dataframe()
-    caption = getattr(table, "caption_text", "")
-    
-    csv_path = os.path.join(output_folder, f"table_{i}.csv")
-    df.to_csv(csv_path, index=False, encoding="utf-8-sig")
-    print(f"✅ Table {i} exported to {csv_path}")
-    
-    if caption:
-        print(f"   Caption: {caption}")
 
-# === 3. Extract pictures/images ===
+    # --- Safely extract caption ---
+    caption = ""
+    try:
+        if hasattr(table, "caption_text") and callable(table.caption_text):
+            caption = table.caption_text() or ""
+        elif hasattr(table, "captions") and table.captions:
+            caption = " ".join(c.text for c in table.captions if hasattr(c, "text"))
+    except Exception:
+        caption = "(no caption)"
+
+    tables.append({
+        "table_number": i,
+        "caption": caption.strip(),
+        "columns": list(map(str, df.columns.tolist())),
+        "data": df.astype(str).to_dict(orient="records")
+    })
+
+# === 3. Extract pictures ===
+pictures = []
 for i, picture in enumerate(doc.pictures, start=1):
-    image_obj = getattr(picture, "image", None)
-    if image_obj and hasattr(image_obj, "png_bytes") and image_obj.png_bytes:
-        img_path = os.path.join(output_folder, f"picture_{i}.png")
-        with open(img_path, "wb") as f:
-            f.write(image_obj.png_bytes)
-        print(f"✅ Picture {i} saved as {img_path}")
-    else:
-        print(f"⚠️ Picture {i} skipped — no image data found.")
-    
-    caption = getattr(picture, "caption_text", None)
-    if caption:
-        print(f"   Caption: {caption}")
-    else:
-        print("   Caption: (none)")
+    # --- Safely extract caption ---
+    caption = ""
+    try:
+        if hasattr(picture, "caption_text") and callable(picture.caption_text):
+            caption = picture.caption_text() or ""
+        elif hasattr(picture, "captions") and picture.captions:
+            caption = " ".join(c.text for c in picture.captions if hasattr(c, "text"))
+    except Exception:
+        caption = "(no caption)"
+
+    # --- Encode image if available ---
+    img_b64 = None
+    if getattr(picture, "image", None) and getattr(picture.image, "png_bytes", None):
+        img_b64 = base64.b64encode(picture.image.png_bytes).decode("utf-8")
+
+    pictures.append({
+        "picture_number": i,
+        "caption": caption.strip(),
+        "image_base64": img_b64 or "(no image data)"
+    })
+
+# === 4. Combine everything into one JSON ===
+combined_data = {
+    "source_pdf": os.path.basename(pdf_path),
+    "texts": texts,
+    "tables": tables,
+    "pictures": pictures
+}
+
+# === 5. Save to JSON ===
+json_path = os.path.join(output_folder, "extracted_data.json")
+with open(json_path, "w", encoding="utf-8") as f:
+    json.dump(combined_data, f, indent=4, ensure_ascii=False)
+
+print(f"✅ Combined JSON saved to {json_path}")
+print(f"   - Text sections: {len(texts)}")
+print(f"   - Tables: {len(tables)}")
+print(f"   - Pictures: {len(pictures)}")
