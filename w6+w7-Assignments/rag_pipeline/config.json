@@ -1,0 +1,23 @@
+{
+    "docling": {
+        "model": "docling/document-v2.57.0",
+        "extract_text": true,
+        "extract_images": true
+    },
+    "embedding": {
+        "model": "sentence-transformers/all-MiniLM-L6-v2",
+        "chunk_size": 500,
+        "overlap": 50
+    },
+    "faiss": {
+        "index_path": "rag_pipeline/faiss_index.bin"
+    },
+    "combined_json": {
+        "output": "rag_pipeline/combined_data.json"
+    },
+    "rag": {
+        "retrieval_top_k": 3,
+        "llm": "gpt-4o-mini",
+        "prompt_template": "You are an AI document assistant. Use the extracted document context to answer clearly and accurately.\\n\\nContext:\\n{context}\\n\\nQuestion: {question}\\n\\nAnswer:"
+    }
+}
