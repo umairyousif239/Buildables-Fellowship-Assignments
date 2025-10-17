@@ -1,6 +1,13 @@
+# Main Libraries
 docling[ocr]
 faiss-cpu
 google-generativeai
 langchain
 streamlit
 tiktoken
+sentence_transformers
+pillow
+
+# Optional (for Tests)
+PyPDF2
+pdfplumber

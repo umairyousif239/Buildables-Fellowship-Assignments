@@ -1,0 +1,43 @@
+{
+  "pdf": "FYP Proposal (AI Surveillance System).pdf",
+  "engines": {
+    "PyPDF2": {
+      "stats": {
+        "words": 1571,
+        "chars": 10092,
+        "lines": 182
+      },
+      "sample": "AI Surveillance System Powered by Raspberry Pi  \nFinal Year Project  Proposal  \nSession  2022-2026 \n \n \nA project submitted in partial fulfilment  of the  \nShah Abdul Latif University Degree  \nof  \nBS in Computer Science (SALU)  \n \n \n \nDepartment of Computer Science  \nShah Abdul Latif University, Khairpur  \n(Shahdadkot  Campus )\n\nProject Registration  \nType of project  [x] Traditional              [  ] Industrial   [  ] Continuing  \nNature of project  [x] Development            [  ] R esearch & Development   \nSustainable  \nDevelopment Goals  \n(SDGs)  [  ] Good Health and Well -Being                      [  ] Quality Education  \n[x] Industry, Innovation, and Infrastructure      [  ] Gender Equality  \n[  ] Decent Work and Economic Growth           [  ]  Climate Action  \nArea of specialization  [x] Artificial Intelli gence (AI)   [  ] Data Science and Analytics  \n[  ] Internet of Things (IoT)       [  ] Blockchain        \n[  ] Mobile App Development   [  ]  Web Development               [  ] Cybersecurity  \n[  ] Game Development             [  ]  Natural Language Processing  (NLP)  \nProject Group Members  \nSr.# Reg. #  Student Name  Email ID  Signature  \n(i) (Group Leader)  \nCS-22-16 "
+    },
+    "pdfplumber": {
+      "stats": {
+        "words": 1507,
+        "chars": 10028,
+        "lines": 180
+      },
+      "sample": "AI Surveillance System Powered by Raspberry Pi\nFinal Year Project Proposal\nSession 2022-2026\nA project submitted in partial fulfilment of the\nShah Abdul Latif University Degree\nof\nBS in Computer Science (SALU)\nDepartment of Computer Science\nShah Abdul Latif University, Khairpur\n(Shahdadkot Campus)\nProject Registration\nType of project [x] Traditional [ ] Industrial [ ] Continuing\nNature of project [x] Development [ ] Research & Development\n[ ] Good Health and Well-Being [ ] Quality Education\nSustainable\nDevelopment Goals [x] Industry, Innovation, and Infrastructure [ ] Gender Equality\n(SDGs)\n[ ] Decent Work and Economic Growth [ ] Climate Action\n[x] Artificial Intelligence (AI) [ ] Data Science and Analytics\n[ ] Internet of Things (IoT) [ ] Blockchain\nArea of specialization\n[ ] Mobile App Development [ ] Web Development [ ] Cybersecurity\n[ ] Game Development [ ] Natural Language Processing (NLP)\nProject Group Members\nSr.# Reg. # Student Name Email ID Signature\n(Group Leader)\n(i) Umair Yousif umair.yousif@salu.edu.pk\nCS-22-16\n(ii) CS-22-13 Sahil Kumar sahil.kumar@salu.edu.pk\n(iii) CS-22-03 Aleeza Bhatti aleeza@salu.edu.pk\n(iv) CS-22-05 Benezir Alvi benezir.alvi@salu.edu.pk\nPlagiarism"
+    },
+    "Docling": {
+      "stats": {
+        "words": 1426,
+        "chars": 10064,
+        "lines": 151
+      },
+      "sample": "AI Surveillance System Powered by Raspberry Pi\nFinal Year Project Proposal Session 2022-2026\nA project submitted in partial fulfilment of the Shah Abdul Latif University Degree of BS in Computer Science (SALU)\nUNIV\nATIF\nC\n★\nABL\nSHAH\n业\nDepartment of Computer Science Shah Abdul Latif University, Khairpur (Shahdadkot Campus)\nProject Registration\nType of project\n[x] Traditional               [  ] Industrial\n[  ] Continuing\nNature of project\n[x] Development            [  ] Research & Development\nSustainable Development Goals (SDGs)\n[  ] Good Health and Well-Being                      [  ] Quality Education\n[x] Industry, Innovation, and Infrastructure     [  ] Gender Equality\n[  ] Decent Work and Economic Growth          [  ]  Climate Action\nArea of specialization\n[x] Artificial Intelligence (AI)   [  ] Data Science and Analytics\n[  ] Internet of Things (IoT)       [  ] Blockchain\n[  ] Mobile App Development   [  ]  Web Development               [  ] Cybersecurity\n[  ] Game Development             [  ]  Natural Language Processing (NLP)\nProject Group Members\nSr.#\nReg. #\nStudent Name\nEmail ID\nSignature\n(i)\n(Group Leader)\nCS-22-16\nUmair Yousif\numair.yousif@salu.edu.pk\n(ii)\nCS-22-13\nSahil K"
+    }
+  },
+  "overlaps": {
+    "PyPDF2_vs_pdfplumber": {
+      "overlap_words": 717,
+      "jaccard": 0.8628158844765343
+    },
+    "PyPDF2_vs_Docling": {
+      "overlap_words": 683,
+      "jaccard": 0.7988304093567251
+    },
+    "pdfplumber_vs_Docling": {
+      "overlap_words": 717,
+      "jaccard": 0.908745247148289
+    }
+  }
+}
