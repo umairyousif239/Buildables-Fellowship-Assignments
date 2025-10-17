@@ -1,0 +1,7 @@
+docling
+faiss-cpu
+google-generativeai
+langchain
+streamlit
+tiktoken
+pytesseract
