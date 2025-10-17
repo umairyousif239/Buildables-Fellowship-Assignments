@@ -4,4 +4,3 @@ google-generativeai
 langchain
 streamlit
 tiktoken
-pytesseract
