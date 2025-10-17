@@ -1,4 +1,4 @@
-docling
+docling[ocr]
 faiss-cpu
 google-generativeai
 langchain
