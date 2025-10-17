@@ -1,13 +1,10 @@
-# Main Libraries
-docling[ocr]
-faiss-cpu
-google-generativeai
-langchain
-streamlit
-tiktoken
-sentence_transformers
-pillow
-
-# Optional (for Tests)
-PyPDF2
-pdfplumber
+docling[ocr]==2.57.0
+faiss-cpu==1.12.0
+google-generativeai==0.8.5
+langchain==0.3.27
+streamlit==1.45.0
+tiktoken==0.12.0
+sentence_transformers==5.1.0
+pillow==11.2.1
+PyPDF2==3.0.1
+pdfplumber==0.11.7
