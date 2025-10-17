@@ -44,8 +44,8 @@ def per_doc_paths(pdf_path):
         "long_md": os.path.join(RESULTS_DIR, f"long_context_{base}.md"),
     }
 
-st.set_page_config(page_title="IntelliDoc AI — Modular", layout="wide")
-st.title("IntelliDoc AI — Modular Streamlit App")
+st.set_page_config(page_title="DocWeave AI — Weaving answers from your documents", layout="wide")
+st.title("DocWeave AI — Weaving answers from your documents")
 
 with st.sidebar:
     # Load defaults from config.json
