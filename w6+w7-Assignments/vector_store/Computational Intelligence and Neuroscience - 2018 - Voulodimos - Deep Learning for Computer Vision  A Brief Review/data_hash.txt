@@ -1,0 +1,1 @@
+c2ab23275d17f0ca0b8572913abe5f65effade242e1ebf42ed59c97f6f837c5d:500:50:sentence-transformers/all-MiniLM-L6-v2
