@@ -1,0 +1,14 @@
+Question no. 1:
+(a) What are the main factors that contributed to the rise of deep learning in recent years?
+(b) Explain how GPU computing and large labeled datasets have influenced the performance of deep learning models.
+(c) What role did new activation functions and regularization techniques play in improving neural networks?
+
+Question no. 2:
+(a) Describe the structure and functioning of Convolutional Neural Networks (CNNs).
+(b) Compare CNNs with Deep Belief Networks (DBNs) and Deep Boltzmann Machines (DBMs) in terms of learning approach and efficiency.
+(c) What are the main advantages and limitations of Stacked Autoencoders compared to the other two architectures?
+
+Question no. 3:
+(a) Discuss how CNNs are applied in object detection and face recognition tasks.
+(b) What are some key differences between holistic and part-based methods in human pose estimation?
+(c) How have multimodal approaches improved performance in human activity recognition?

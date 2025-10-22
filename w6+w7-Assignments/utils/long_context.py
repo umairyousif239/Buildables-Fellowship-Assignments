@@ -1,4 +1,4 @@
-import json, numpy as np, faiss
+import numpy as np, faiss
 from sentence_transformers import SentenceTransformer
 import google.generativeai as genai
 

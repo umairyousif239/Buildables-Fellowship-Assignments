@@ -1,0 +1,435 @@
+{
+  "name": "Job Alert and Fake Jobs Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 8
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -544,
+        -224
+      ],
+      "id": "d60a42a8-3e44-454d-baad-3abc7bb086d9",
+      "name": "Schedule Trigger",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "xml",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1,
+      "position": [
+        320,
+        -224
+      ],
+      "id": "4eede37b-b119-4c10-b7bc-db47e7eb743f",
+      "name": "Extract from File"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-flash",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-flash"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=You are a job authenticity checker.\n\nYou will receive a JSON object representing a job listing with fields such as:\n- title\n- company\n- location\n- description\n- url\n- salary (if available)\n\nYour task:\nAnalyze the job post and determine if it is likely a genuine listing or a fake/scam.\n\nRed flags include (but are not limited to):\n- WhatsApp or Telegram contact numbers\n- Unrealistic or extremely high salaries\n- Missing or unknown company name\n- Vague or copied text\n- Overuse of \"Work from home\" or \"Remote\" without details\n- Requests for upfront payments or personal information\n\nRespond **only** in the following JSON format:\n```json\n{\n  \"authenticity\": \"GENUINE\" or \"FAKE\",\n  \"reason\": \"<short and clear reason>\",\n  \"job\": {\n    \"title\": \"<title>\",\n    \"company\": \"<company>\",\n    \"location\": \"<location>\",\n    \"url\": \"<url>\",\n    \"salary\": \"<salary>\",\n    \"description\": \"<shortened or summarized version of description>\"\n  }\n}\n\nJob post: {{ $json.content.parts[0].text }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        -224,
+        256
+      ],
+      "id": "4858fee5-bdf3-41cd-9fdf-c9745b62e59b",
+      "name": "Fake-Job Filter",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "BJAbMvLq8sDjkgpp",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-2.5-flash",
+          "mode": "list",
+          "cachedResultName": "models/gemini-2.5-flash"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=You are an AI assistant that filters job postings.\n\nTask:\nGiven the following job data, extract and return ONLY if it is:\n- Based in Pakistan\n- Related to AI, Machine Learning, or Data Science\n- Intended for interns, fresh graduates, or junior-level candidates\n\nIf the job does not meet all three conditions, return only the word: IGNORE.\n\nOtherwise, respond in JSON format:\n{\n  \"title\": \"<job title>\",\n  \"company\": \"<company name if available or UNKNOWN>\",\n  \"location\": \"<city or Pakistan if not specified>\",\n  \"category\": \"<AI/ML/Data Science>\",\n  \"link\": \"<url>\",\n  \"summary\": \"<1-line summary>\"\n}\n\nJob data:\n{{$json[\"title\"]}}\n{{ $json.description }}\nLink: {{ $json.link }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1,
+      "position": [
+        -528,
+        256
+      ],
+      "id": "6b1c2085-56ac-4075-9698-8a0589691704",
+      "name": "Job-Filtering",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "BJAbMvLq8sDjkgpp",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://www.google.com/alerts/feeds/14882494838946405358/15727117493467260765",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -96,
+        -224
+      ],
+      "id": "be7241d3-1e75-481e-a252-203d7e4d52f8",
+      "name": "Data From Google Alerts"
+    },
+    {
+      "parameters": {
+        "fieldToSplitOut": "title, description, link",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.splitOut",
+      "typeVersion": 1,
+      "position": [
+        464,
+        -32
+      ],
+      "id": "f4465089-fd09-4967-b276-11576f1ce6ec",
+      "name": "Split Out"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.authenticity }}",
+                    "rightValue": "GENUINE",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "d8bad40e-14cb-4916-9d01-85170f10001b"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "a6f17c0e-ae11-4e41-8c4e-bbe202e87d5f",
+                    "leftValue": "={{ $json.authenticity }}",
+                    "rightValue": "FAKE",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.3,
+      "position": [
+        464,
+        256
+      ],
+      "id": "f835f1bd-ece7-4214-80bd-44bb2e00ccf9",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "jsCode": "return [\n  {\n    json: {\n      title: \"Junior AI Engineer — Lahore\",\n      description: \"Exciting role at XYZ company using Python, ML, and TensorFlow. Work on production-grade models and gain hands-on experience.\",\n      link: \"https://example.com/job/ai\"\n    }\n  },\n  {\n    json: {\n      title: \"AI Intern (Remote - Pakistan)\",\n      description: \"Join our ML team to assist in model training and dataset preparation. Knowledge of Python required.\",\n      link: \"https://example.com/job/intern\"\n    }\n  },\n  {\n    json: {\n      title: \"Data Scientist - Karachi\",\n      description: \"Work with large-scale datasets and build predictive models. Experience with pandas, sklearn, and PyTorch is a plus.\",\n      link: \"https://example.com/job/data-scientist\"\n    }\n  },\n  {\n    json: {\n      title: \"Machine Learning Assistant — Karachi\",\n      description: \"Earn up to 400,000 PKR weekly! Send your CV via WhatsApp to +923001234567. No experience required.\",\n      link: \"https://fakejobsite.pk/ml\"\n    }\n  },\n  {\n    json: {\n      title: \"AI Research Associate — Islamabad\",\n      description: \"Assist senior researchers in NLP projects. Requires basic understanding of neural networks.\",\n      link: \"https://example.com/job/research\"\n    }\n  }\n];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        0,
+        -32
+      ],
+      "id": "8480fe16-270f-474b-bce5-d5a13bfa7ed5",
+      "name": "Demo"
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nconst results = [];\n\nfor (const item of items) {\n  const raw = item.json;\n\n  try {\n    const text = raw.content?.parts?.[0]?.text || \"\";\n    const jsonString = text.replace(/```json|```/g, \"\").trim();\n    const parsed = JSON.parse(jsonString);\n\n    // Combine authenticity, reason, and job details\n    results.push({\n      json: {\n        authenticity: parsed.authenticity || \"UNKNOWN\",\n        reason: parsed.reason || \"No reason provided.\",\n        job: parsed.job || {\n          title: \"Untitled\",\n          company: \"Unknown\",\n          location: \"Unspecified\",\n          url: \"No link\",\n          salary: \"Not mentioned\",\n          description: \"No description available.\"\n        }\n      }\n    });\n  } catch (err) {\n    results.push({\n      json: {\n        authenticity: \"UNKNOWN\",\n        reason: `Parsing error: ${err.message}`,\n        job: {\n          title: \"Untitled\",\n          company: \"Unknown\",\n          location: \"Unspecified\",\n          url: \"No link\",\n          salary: \"Not mentioned\",\n          description: \"No description available.\"\n        }\n      }\n    });\n  }\n}\n\nreturn results;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        176,
+        256
+      ],
+      "id": "db1d4bf7-a152-406f-9a25-6247e66acf7d",
+      "name": "Parse Authenticity JSON"
+    },
+    {
+      "parameters": {
+        "resource": "message",
+        "guildId": {
+          "__rl": true,
+          "value": "1430608944782512300",
+          "mode": "list",
+          "cachedResultName": "n8n Project Demo",
+          "cachedResultUrl": "https://discord.com/channels/1430608944782512300"
+        },
+        "channelId": {
+          "__rl": true,
+          "value": "1430608946179211377",
+          "mode": "list",
+          "cachedResultName": "general",
+          "cachedResultUrl": "https://discord.com/channels/1430608944782512300/1430608946179211377"
+        },
+        "content": "=",
+        "options": {},
+        "embeds": {
+          "values": [
+            {
+              "description": "={{ $json.embeds[0].fields[0].name }}: {{ $json.embeds[0].fields[0].value }}\n\n{{ $json.embeds[0].fields[1].name }}: {{ $json.embeds[0].fields[1].value }}\n\n{{ $json.embeds[0].fields[2].name }}: {{ $json.embeds[0].fields[2].value }}\n\n{{ $json.embeds[0].fields[3].name }}: {{ $json.embeds[0].fields[3].value }}\n\n{{ $json.embeds[0].fields[4].name }}: {{ $json.embeds[0].fields[4].value }}",
+              "author": "Job Alert Bot",
+              "color": "={{ $json.embeds[0].color }}",
+              "timestamp": "={{ $json.embeds[0].timestamp }}",
+              "title": "={{ $json.embeds[0].title }} @ {{ $json.embeds[0].fields[0].value }}",
+              "url": "={{ $json.embeds[0].url }}"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        464,
+        544
+      ],
+      "id": "f58500d4-b35b-40a9-aab7-10a2c404cc40",
+      "name": "Send a message",
+      "webhookId": "4568c0d0-c713-41ee-b108-b094ddec1e3c",
+      "credentials": {
+        "discordBotApi": {
+          "id": "qIOARUXCTyoY74MI",
+          "name": "Discord Bot account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nconst results = [];\n\nfor (const item of items) {\n  const job = item.json.job || {};\n  \n  const title = job.title || \"Untitled\";\n  const company = job.company || \"Unknown\";\n  const location = job.location || \"Unspecified\";\n  const link = job.url || \"No link\";\n  const reason = item.json.reason || \"No reason provided\";\n  const authenticity = (item.json.authenticity || \"unknown\").toUpperCase();\n\n  // Create a Discord embed\n  const embed = {\n    title: `${title}`,\n    url: link,\n    color: authenticity === \"REAL\" ? 3066993 : authenticity === \"FAKE\" ? 15158332 : 9807270, // green, red, grey\n    fields: [\n      { name: \"🏢 Company\", value: company, inline: true },\n      { name: \"📍 Location\", value: location, inline: true },\n      { name: \"✅ Authenticity\", value: authenticity, inline: true },\n      { name: \"📝 Description\", value: $input.first().json.job.description || \"No description provided\", inline: true },\n      { name: \"🧾 Reason\", value: reason || \"No reason provided\", inline: false }\n    ],\n    footer: { text: \"🤖 Verified by AI Job Checker\" },\n    timestamp: new Date().toISOString()\n  };\n\n  // Discord webhook expects a \"content\" or \"embeds\" array\n  results.push({\n    json: {\n      content: \"**🧠 AI/ML Job Alert!**\",\n      embeds: [embed]\n    }\n  });\n}\n\nreturn results;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -528,
+        544
+      ],
+      "id": "90921d30-e1cf-411a-8d05-5d1a159ef5be",
+      "name": "Format Discord Message"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        -576,
+        -32
+      ],
+      "id": "e3ead01c-0d54-4750-8572-666247c3b2dc",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "content": "## Automated Trigger\nThis trigger would be the one used when the automation is fully set up.",
+        "height": 256,
+        "width": 1088
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -576,
+        -320
+      ],
+      "typeVersion": 1,
+      "id": "c375d0fa-ef9b-4e65-8c27-702c15aecbf3",
+      "name": "Sticky Note"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Data From Google Alerts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract from File": {
+      "main": [
+        []
+      ]
+    },
+    "Job-Filtering": {
+      "main": [
+        [
+          {
+            "node": "Fake-Job Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Data From Google Alerts": {
+      "main": [
+        [
+          {
+            "node": "Extract from File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fake-Job Filter": {
+      "main": [
+        [
+          {
+            "node": "Parse Authenticity JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Split Out": {
+      "main": [
+        [
+          {
+            "node": "Job-Filtering",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Format Discord Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Demo": {
+      "main": [
+        [
+          {
+            "node": "Split Out",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Authenticity JSON": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Discord Message": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Demo",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "46ddf9aa-cd90-45d0-a478-2122624f9e40",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "4f9e2b6a0bd42079a3ce3bb9e42e1a39d9124507101350a854adfe143294c18b"
+  },
+  "id": "xYwJxj2xEr3SUuWq",
+  "tags": []
+}

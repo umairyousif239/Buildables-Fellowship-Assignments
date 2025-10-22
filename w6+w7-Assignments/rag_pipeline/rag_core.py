@@ -77,7 +77,6 @@ def build_or_load_index(extracted_json, cache_dir, embedding_model, size, overla
             f.write(key)
     else:
         index = faiss.read_index(idx_file)
-        # load embeddings file to ensure it exists (embeddings are not used here)
         np.load(emb_file)
         with open(chunks_file, "r", encoding="utf-8") as f:
             chunks = json.load(f)

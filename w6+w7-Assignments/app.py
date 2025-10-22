@@ -1,7 +1,6 @@
 import os, sys, json
 import streamlit as st
 
-# Use repo root (this file's directory), not parent
 ROOT = os.path.dirname(__file__)
 if ROOT not in sys.path: sys.path.insert(0, ROOT)
 
@@ -63,8 +62,6 @@ with st.sidebar:
         runtime_cfg["chunk_size"] = 800
         runtime_cfg["overlap"] = 150
         runtime_cfg["retrieval_top_k"] = 7
-        # Optionally pick a stronger model if you have access:
-        # runtime_cfg["llm_model"] = "gemini-1.5-pro"
 
     # Advanced settings (hidden for normal users)
     with st.expander("Advanced RAG settings (optional)", expanded=False):
@@ -186,7 +183,7 @@ with tabs[1]:
                             st.markdown(f"- {i}) dist={d:.2f}")
                             st.code(c)
 
-                    # New: logging and export controls
+                    # Logging and export controls
                     colA, colB = st.columns(2)
                     if colA.button("Add to comparison log"):
                         p = append_comparison_result(RESULTS_DIR, q, rag_ans, non_rag_ans)
