@@ -260,17 +260,109 @@ with tabs[5]:
             st.warning(EXTRACTION_WARNING)
         else:
             jd = json.load(open(paths["extracted_json"], "r", encoding="utf-8"))
-            jd = json.load(open(paths["extracted_json"], "r", encoding="utf-8"))
             corpus = jd.get("texts", [])
+
+            # Settings
             size = st.number_input("Summary chunk size", 1000, 8000, 2000, 200)
             overlap = st.number_input("Summary overlap", 0, 1000, 300, 50)
+            max_chunks = st.number_input("Max chunks to summarize (safety cap)", 1, 200, 50, 1)
             q1 = st.text_input("Q1", "Summarize the project goals and list the main components.")
             q2 = st.text_input("Q2", "What methods or technologies are proposed? Mention hardware and software.")
             q3 = st.text_input("Q3", "What are potential limitations or risks, and how might they be mitigated?")
+
             if st.button("Run long-context"):
-                lvl1, lvl2 = hierarchical_summarize(corpus, model_id=cfg["llm_model"], api_key=GEMINI_API_KEY, size=int(size), overlap=int(overlap))
-                qa = qa_over_corpus(corpus, [q1,q2,q3], embedding_model=cfg["embedding_model"], model_id=cfg["llm_model"], api_key=GEMINI_API_KEY)
-                st.subheader("Level-2 Summary"); st.write(lvl2)
+                # Build runtime cfg and LLM
+                rcfg = st.session_state.get("runtime_cfg", load_config(CONFIG_PATH))
+
+                # Chunk helper (char-based)
+                def _chunk_text(s, sz, ov):
+                    out, i, step = [], 0, max(1, sz - ov)
+                    while i < len(s):
+                        out.append(s[i:i+sz]); i += step
+                    return out
+
+                # 1) Hierarchical summaries with progress + timeout
+                import google.generativeai as genai
+                genai.configure(api_key=GEMINI_API_KEY)
+                model = genai.GenerativeModel(rcfg["llm_model"])
+
+                big = "\n".join(corpus or [])
+                chunks = _chunk_text(big, int(size), int(overlap))
+                if len(chunks) > int(max_chunks):
+                    chunks = chunks[:int(max_chunks)]
+
+                st.write(f"Summarizing {len(chunks)} chunks...")
+                prog = st.progress(0)
+                lvl1 = []
+                for i, ch in enumerate(chunks, 1):
+                    prompt = "Summarize the following content focusing on key facts, entities, and relationships:\n\n" + ch
+                    try:
+                        resp = model.generate_content(
+                            prompt,
+                            generation_config={"temperature": 0.2},
+                            request_options={"timeout": 60}
+                        )
+                        lvl1.append((resp.text or "").strip())
+                    except Exception as e:
+                        lvl1.append(f"[Error summarizing chunk {i}: {e}]")
+                    prog.progress(int(i * 100 / len(chunks)))
+
+                combined = "\n\n".join(lvl1)
+                try:
+                    lvl2 = model.generate_content(
+                        "Create a concise hierarchical summary of the following summaries, preserving section structure and key data:\n\n" + combined,
+                        generation_config={"temperature": 0.2},
+                        request_options={"timeout": 120}
+                    ).text.strip()
+                except Exception as e:
+                    lvl2 = f"[Error creating second-level summary: {e}]"
+
+                # 2) Retrieval-backed Q&A (reuse/cached embedder to avoid re-download)
+                from sentence_transformers import SentenceTransformer
+                import numpy as np, faiss
+
+                embedder = st.session_state.get("embedder")
+                if embedder is None:
+                    with st.spinner("Loading embedding model (first run may take a while)..."):
+                        embedder = SentenceTransformer(rcfg["embedding_model"])
+                        st.session_state.embedder = embedder
+
+                # Build simple retriever on raw corpus
+                try:
+                    embs = embedder.encode(corpus, show_progress_bar=False)
+                except Exception as e:
+                    st.error(f"Embedding failed: {e}")
+                    embs = None
+
+                qa = []
+                if embs is not None and len(embs):
+                    dim = embs.shape[1]
+                    index = faiss.IndexFlatL2(dim)
+                    index.add(np.array(embs).astype("float32"))
+
+                    def _retrieve(q, k=5):
+                        qv = embedder.encode([q])
+                        d, ix = index.search(np.array(qv).astype("float32"), k)
+                        return [(corpus[i], float(d[0][j])) for j, i in enumerate(ix[0])]
+
+                    for q in [q1, q2, q3]:
+                        top = _retrieve(q, k=5)
+                        ctx = "\n".join([t for t, _ in top])
+                        try:
+                            ans = model.generate_content(
+                                f"You are an AI document assistant. Use the context to answer clearly.\n\nContext:\n{ctx}\n\nQuestion: {q}\n\nAnswer:",
+                                generation_config={"temperature": 0.2},
+                                request_options={"timeout": 120}
+                            ).text.strip()
+                        except Exception as e:
+                            ans = f"[Error answering: {e}]"
+                        qa.append({"question": q, "answer": ans, "top_contexts": [{"text": t, "dist": d} for t, d in top]})
+                else:
+                    st.warning("Skipping Q&A because embeddings were not created.")
+
+                # Show and save outputs
+                st.subheader("Level-2 Summary")
+                st.write(lvl2)
                 out_json = paths["long_json"]; out_md = paths["long_md"]
                 with open(out_json, "w", encoding="utf-8") as f:
                     json.dump({"level1_count": len(lvl1), "level2_summary": lvl2, "qa": qa}, f, ensure_ascii=False, indent=2)
