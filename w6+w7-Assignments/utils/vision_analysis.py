@@ -1,7 +1,7 @@
 from PIL import Image
 import google.generativeai as genai
 
-def analyze_image(image_file, task="photograph", model_id="gemini-1.5-flash", api_key=None):
+def analyze_image(image_file, task="photograph", model_id="gemini-2.5-flash", api_key=None):
     if api_key:
         genai.configure(api_key=api_key)
     prompts = {

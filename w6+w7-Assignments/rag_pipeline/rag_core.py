@@ -20,7 +20,7 @@ def load_config(config_path):
         "chunk_size": 500,
         "overlap": 50,
         "retrieval_top_k": 5,
-        "llm_model": "gemini-1.5-flash",
+        "llm_model": "gemini-2.5-flash",
         "prompt_template": "You are an AI document assistant. Use the extracted document context to answer clearly and accurately.\n\nContext:\n{context}\n\nQuestion: {question}\n\nAnswer:"
     }
     if config_path and os.path.exists(config_path):

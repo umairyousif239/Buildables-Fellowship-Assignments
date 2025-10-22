@@ -2,7 +2,7 @@ import numpy as np, faiss
 from sentence_transformers import SentenceTransformer
 import google.generativeai as genai
 
-def hierarchical_summarize(corpus, model_id="gemini-1.5-flash", api_key=None, size=2000, overlap=300):
+def hierarchical_summarize(corpus, model_id="gemini-2.5-flash", api_key=None, size=2000, overlap=300):
     if api_key: genai.configure(api_key=api_key)
     model = genai.GenerativeModel(model_id)
     def _chunk(s, sz, ov):
@@ -16,7 +16,7 @@ def hierarchical_summarize(corpus, model_id="gemini-1.5-flash", api_key=None, si
     lvl2 = model.generate_content("Create a concise hierarchical summary of the following:\n\n"+ "\n\n".join(lvl1)).text.strip()
     return lvl1, lvl2
 
-def qa_over_corpus(corpus, questions, embedding_model="all-MiniLM-L6-v2", model_id="gemini-1.5-flash", api_key=None, k=5):
+def qa_over_corpus(corpus, questions, embedding_model="all-MiniLM-L6-v2", model_id="gemini-2.5-flash", api_key=None, k=5):
     if api_key: genai.configure(api_key=api_key)
     model = genai.GenerativeModel(model_id)
     embedder = SentenceTransformer(embedding_model)

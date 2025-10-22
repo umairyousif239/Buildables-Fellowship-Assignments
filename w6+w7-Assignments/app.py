@@ -101,7 +101,7 @@ with st.sidebar:
     # Footer
     st.sidebar.markdown("---")
     st.sidebar.markdown("Developed by [Umair Yousif](https://www.linkedin.com/in/umairyousif) | [GitHub](https://github.com/umairyousif239)")
-    st.sidebar.markdown("Powered by [Google Gemini-1.5-flash](https://developers.generativeai.google/products/gemini) | [Buildables Fellowship](https://buildables.dev/#/fellowship)")
+    st.sidebar.markdown("Powered by [Google Gemini-2.5-flash](https://developers.generativeai.google/products/gemini) | [Buildables Fellowship](https://buildables.dev/#/fellowship)")
 
 
 tabs = st.tabs([
