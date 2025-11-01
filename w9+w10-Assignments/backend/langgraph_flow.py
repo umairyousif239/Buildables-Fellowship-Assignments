@@ -3,7 +3,7 @@ from backend.mcp_github import get_repo_activity
 from typing import TypedDict, Optional, Dict, Any
 import json
 
-# --- Define the state schema ---
+# Defining the state schema
 class AgentState(TypedDict, total=False):
     query: str
     repo: Optional[str]
@@ -12,7 +12,7 @@ class AgentState(TypedDict, total=False):
     error: Optional[str]
 
 
-# --- Node Functions ---
+# Node Functions
 def user_input_node(state: AgentState) -> AgentState:
     """Extract repo name from user query"""
     query = state.get("query", "")
@@ -68,7 +68,7 @@ def summarize_node(state: AgentState) -> AgentState:
     return state
 
 
-# --- Define Reasoning Graph ---
+# Define Reasoning Graph
 graph = StateGraph(AgentState)
 
 graph.add_node("input", user_input_node)
