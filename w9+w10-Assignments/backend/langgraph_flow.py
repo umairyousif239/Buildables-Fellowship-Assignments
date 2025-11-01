@@ -1,32 +1,91 @@
-# langgraph_flow.py
-import asyncio
-# import langgraph SDK if available
-# from langgraph import Graph, Node, ToolNode, LLMNode
+from langgraph.graph import StateGraph, END
+from backend.mcp_github import get_repo_activity
+from typing import TypedDict, Optional, Dict, Any
+import json
 
-async def run_flow(mcp_payload: dict) -> dict:
-    """
-    Minimal orchestrator:
-    1. Examine context & query
-    2. Decide whether to call a tool (e.g., file retriever)
-    3. Aggregate evidence
-    4. Return trace + final answer
-    """
-    query = mcp_payload["query"]
-    context = mcp_payload.get("context", {})
+# --- Define the state schema ---
+class AgentState(TypedDict, total=False):
+    query: str
+    repo: Optional[str]
+    repo_data: Optional[Dict[str, Any]]
+    summary: Optional[str]
+    error: Optional[str]
 
-    trace = []
-    # Simple rule: if context mentions 'file:' call file retriever
-    if context.get("source") == "file":
-        trace.append({"step": "call_tool", "tool": "file_retriever"})
-        # simple synchronous call to your tool; replace with your actual tool
-        from tools.file_retriever import retrieve_from_file
-        doc = retrieve_from_file(context.get("file_path"))
-        trace.append({"step": "tool_result", "tool": "file_retriever", "result_summary": doc[:200]})
-        # simple reasoning: combine doc and query
-        answer = f"Found in file: {doc[:400]} -- (answer synthesized for query: {query})"
-    else:
-        trace.append({"step": "llm_reason", "note": "No external tool required"})
-        # in real flow call a LangGraph LLMNode or your LLM
-        answer = f"Simulated answer for '{query}' using provided context."
 
-    return {"answer": answer, "trace": trace}
+# --- Node Functions ---
+def user_input_node(state: AgentState) -> AgentState:
+    """Extract repo name from user query"""
+    query = state.get("query", "")
+    state["repo"] = parse_repo_name(query)
+    return state
+
+def parse_repo_name(query: str):
+    words = query.split()
+    for w in words:
+        if "/" in w:
+            return w
+    return "sample-repo/example-project"
+
+def github_retriever_node(state: AgentState) -> AgentState:
+    """Fetch repo activity using MCP GitHub retriever"""
+    repo = state.get("repo")
+    if not repo:
+        state["error"] = "No repository specified."
+        return state
+    
+    try:
+        owner, repo_name = repo.split("/")
+        data = get_repo_activity(owner, repo_name)
+        state["repo_data"] = data
+    except Exception as e:
+        state["error"] = f"Failed to retrieve repo: {e}"
+    return state
+
+def summarize_node(state: AgentState) -> AgentState:
+    """Summarize fetched GitHub data"""
+    data = state.get("repo_data", {})
+    summary = []
+
+    commits = data.get("commits", [])
+    if commits:
+        summary.append(f"🧾 Recent commits ({len(commits)}):")
+        for c in commits:
+            summary.append(f"- {c['author']}: {c['message']}")
+
+    issues = data.get("open_issues", [])
+    if issues:
+        summary.append(f"\n🐛 Open issues ({len(issues)}):")
+        for i in issues:
+            summary.append(f"- {i['title']} (by {i['user']})")
+
+    prs = data.get("pull_requests", [])
+    if prs:
+        summary.append(f"\n🔃 Pull requests ({len(prs)}):")
+        for p in prs:
+            summary.append(f"- {p['title']} [{p['state']}] by {p['user']}")
+
+    state["summary"] = "\n".join(summary) or "No recent activity found."
+    return state
+
+
+# --- Define Reasoning Graph ---
+graph = StateGraph(AgentState)
+
+graph.add_node("input", user_input_node)
+graph.add_node("retrieve", github_retriever_node)
+graph.add_node("summarize", summarize_node)
+
+graph.add_edge("input", "retrieve")
+graph.add_edge("retrieve", "summarize")
+
+graph.set_entry_point("input")
+graph.set_finish_point("summarize")
+
+app = graph.compile()
+
+
+def run_github_agent(query: str):
+    """Run the LangGraph reasoning flow for a GitHub activity query."""
+    initial_state: AgentState = {"query": query}
+    result = app.invoke(initial_state)
+    return result.get("summary", result.get("error", "Something went wrong."))
