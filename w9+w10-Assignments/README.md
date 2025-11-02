@@ -55,7 +55,6 @@ This project demonstrates practical integration of AI models with REST APIs, rea
 
     Gemini 2.5 Flash ←→ Local JSON Storage
 
-
 ---
 
 ## 💾 Data Flow Summary
@@ -64,6 +63,22 @@ This project demonstrates practical integration of AI models with REST APIs, rea
 3. The frontend sends this data to **Gemini 2.5 Flash**.  
 4. Gemini returns structured reasoning, analysis, and summary.  
 5. The results are displayed in tabs and saved locally.
+
+---
+
+## 🧠 Reflection — How MCP Improved Context Awareness
+
+The integration of the Model Context Protocol (MCP) significantly enhanced this project’s ability to reason with real, dynamic information instead of relying solely on static prompts. By connecting the LangGraph reasoning flow to the MCP layer (mcp_github.py), the agent gained the ability to fetch live repository data — including commits, issues, and pull requests — directly from GitHub’s API.
+
+This made the AI agent context-aware in a meaningful way:
+
+It reasons using up-to-date information about a repository’s activity and structure.
+
+The LangGraph pipeline can process this data step-by-step, ensuring logical flow and explainable reasoning.
+
+MCP provides a clean separation between reasoning (LangGraph) and retrieval (external APIs), resulting in a modular, maintainable, and scalable system.
+
+Overall, MCP transformed the agent from a simple LLM prompt wrapper into a context-driven reasoning system capable of making informed analyses of real-world data sources. This separation of concerns mirrors how production-grade AI agents are built — ensuring reliability, adaptability, and clear interpretability.
 
 ---
 
