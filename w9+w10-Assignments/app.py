@@ -1,165 +1,148 @@
-import os
-import requests
 import streamlit as st
-import html
+import requests
+import google.generativeai as genai
+import json
+import os
+from datetime import datetime
 
-st.set_page_config(page_title="MCP GitHub Repo Analyzer", layout="wide")
+# Config
+st.set_page_config(page_title="MCP GitHub Agent — Gemini Enhanced", layout="centered")
 
-backend_from_secrets = None
-try:
-	backend_from_secrets = st.secrets.get("BACKEND_URL")
-except Exception:
-	backend_from_secrets = None
+# Setup Gemini
+genai.configure(api_key=st.secrets["GEMINI_API_KEY"])
 
-BACKEND_URL = backend_from_secrets or os.getenv("BACKEND_URL", "http://localhost:8000")
+DEFAULT_BACKEND = "http://127.0.0.1:8000"
+BACKEND = st.secrets.get("BACKEND_URL", DEFAULT_BACKEND)
+ANALYZE_ENDPOINT = f"{BACKEND.rstrip('/')}/analyze_repo"
 
+HISTORY_FILE = "analysis_history.json"
+
+# ---------------------- Session + Cache ----------------------
+
+# 🔹 Initialize session variables
 if "history" not in st.session_state:
-	st.session_state.history = []
+    st.session_state.history = []
+if "cache" not in st.session_state:
+    st.session_state.cache = {}
 
+# ---------------------- Helpers ----------------------
 
-def call_backend(query: str):
-	url = f"{BACKEND_URL.rstrip('/')}/analyze_repo"
-	try:
-		r = requests.get(url, params={"query": query}, timeout=60)
-		r.raise_for_status()
-		return r.json()
-	except Exception as e:
-		return {"error": str(e)}
+def load_history():
+    if os.path.exists(HISTORY_FILE):
+        with open(HISTORY_FILE, "r") as f:
+            return json.load(f)
+    return []
 
+def save_to_history(entry):
+    history = load_history()
+    history.append(entry)
+    with open(HISTORY_FILE, "w") as f:
+        json.dump(history, f, indent=2)
 
-def render_result(result: dict, container):
-	container.markdown("### Analysis")
-	if not result:
-		container.info("No result returned from backend.")
-		return
-	if "error" in result:
-		container.error(result["error"]) 
-		return
+def analyze_repo(query: str):
+    # 🔹 Check cache before calling backend
+    if query in st.session_state.cache:
+        return st.session_state.cache[query]
 
-	# show main summary
-	summary = result.get("summary") or result.get("data") or result.get("result")
-	if isinstance(summary, (dict, list)):
-		container.json(summary)
-	else:
-		container.write(summary)
+    resp = requests.get(ANALYZE_ENDPOINT, params={"query": query}, timeout=60)
+    resp.raise_for_status()
+    data = resp.json()
 
-	# optional fields: traces, details
-	traces = result.get("traces") or result.get("reasoning") or result.get("details")
-	if traces:
-		with container.expander("Reasoning / traces", expanded=False):
-			if isinstance(traces, (dict, list)):
-				st.json(traces)
-			else:
-				st.write(traces)
+    # 🔹 Store in cache
+    st.session_state.cache[query] = data
+    return data
 
+def call_gemini(repo_data: dict, query: str):
+    # 🔹 Check cache before calling Gemini
+    if query in st.session_state.cache and "gemini_result" in st.session_state.cache[query]:
+        return st.session_state.cache[query]["gemini_result"]
 
-st.title("MCP GitHub Repository Analyzer")
-st.subheader("MCP GitHub Repository Analyzer is a tool that can be used to retrieve recent commits, issues and pull requests and compose them in an easily readable form.")
-st.markdown("---")
+    model = genai.GenerativeModel("gemini-2.5-flash")
+    prompt = f"""
+    You are a GitHub repository analysis assistant.
+    Here is the repository data (commits, issues, PRs, summary):
+    {json.dumps(repo_data, indent=2)}
 
-# Query input
-st.write("Enter queries like `analyze openai/gpt-4`.")
-with st.form(key="query_form"):
-	query = st.text_input("Ask about a repo…", placeholder="analyze openai/gpt-4")
-	submit = st.form_submit_button("Send")
+    Please respond strictly in this JSON format:
+    {{
+      "reasoning": "Step-by-step reasoning of repo activity and insights.",
+      "analysis": "Detailed analysis of the repository.",
+      "summary": "Concise overall summary."
+    }}
+    """
+    response = model.generate_content(prompt)
+    text = response.text
 
-# Output box
-results_box = st.container()
+    try:
+        parsed = json.loads(text)
+    except json.JSONDecodeError:
+        text_clean = text.replace("```json", "").replace("```", "").strip()
+        try:
+            parsed = json.loads(text_clean)
+        except Exception:
+            parsed = {"reasoning": text, "analysis": "N/A", "summary": "N/A"}
 
-def _render_boxed_result(result: dict, container):
-	"""Render the main result inside a styled boxed HTML block."""
-	if not result:
-		container.markdown("<div style='padding:12px'>No result returned from backend.</div>", unsafe_allow_html=True)
-		return
+    # 🔹 Cache Gemini output too
+    if query in st.session_state.cache:
+        st.session_state.cache[query]["gemini_result"] = parsed
+    else:
+        st.session_state.cache[query] = {"gemini_result": parsed}
 
-	# show error inside box
-	if "error" in result:
-		error_html = f"<div style='border:1px solid #6b7280; background:#2b2f33; padding:14px; border-radius:8px; color:#fff;'><strong>Error</strong><pre style='white-space:pre-wrap;color:#ffb4b4'>{html.escape(result['error'])}</pre></div>"
-		container.markdown(error_html, unsafe_allow_html=True)
-		return
+    return parsed
 
-	summary = result.get("summary") or result.get("data") or result.get("result") or "(no summary)"
-	# prepare summary HTML
-	if isinstance(summary, (dict, list)):
-		import json
-		body = f"<pre style='white-space:pre-wrap;color:#d1d5db'>{html.escape(json.dumps(summary, indent=2))}</pre>"
-	else:
-		body = f"<div style='color:#d1d5db'>{html.escape(str(summary))}</div>"
+# ---------------------- UI ----------------------
 
-	# traces/details
-	traces = result.get("traces") or result.get("reasoning") or result.get("details")
-	traces_html = ""
-	if traces:
-		if isinstance(traces, (dict, list)):
-			import json
-			traces_html = f"<details style='margin-top:10px;color:#cbd5e1'><summary style='cursor:pointer'>Reasoning / traces</summary><pre style='white-space:pre-wrap;color:#cbd5e1'>{html.escape(json.dumps(traces, indent=2))}</pre></details>"
-		else:
-			traces_html = f"<details style='margin-top:10px;color:#cbd5e1'><summary style='cursor:pointer'>Reasoning / traces</summary><pre style='white-space:pre-wrap;color:#cbd5e1'>{html.escape(str(traces))}</pre></details>"
+st.title("🤖 MCP GitHub Agent (Gemini 2.5 Flash)")
+st.caption("Analyze any public GitHub repo — get reasoning, analysis, and summary.")
 
-	# final boxed html
-	boxed_html = (
-		"<div style='border:1px solid #374151; background:#0b1220; padding:16px; border-radius:10px;'>"
-		f"<div style='font-weight:600; color:#e6eef8; margin-bottom:8px'>Analysis</div>"
-		f"{body}"
-		f"{traces_html}"
-		"</div>"
-	)
-	container.markdown(boxed_html, unsafe_allow_html=True)
+query = st.text_input("Enter repository ```(e.g. openai/gpt-4)```:")
 
-# History
-history_box = st.container()
+if st.button("Analyze"):
+    if query.strip():
+        repo_query = query.strip()
 
+        with st.spinner("Fetching repository data..."):
+            repo_data = analyze_repo(f"analyze {repo_query}")
 
-if submit and query:
-	# call backend and render into the boxed output
-	with results_box:
-		status = st.info("Fetching analysis from backend…")
-		result = call_backend(query)
-		status.empty()
-		_render_boxed_result(result, results_box)
-		# record history
-		st.session_state.history.append((query, result))
+        with st.spinner("Generating insights with Gemini 2.5 Flash..."):
+            gemini_resp = call_gemini(repo_data, repo_query)
 
-elif st.session_state.history:
-	# if no new submit, show last result in box
-	last_q, last_res = st.session_state.history[-1]
-	_render_boxed_result(last_res, results_box)
-else:
-	# initial empty state box
-	results_box.markdown("<div style='border:1px dashed #334155; padding:16px; border-radius:10px; color:#94a3b8'>No results yet — enter a query above and press Send.</div>", unsafe_allow_html=True)
+        reasoning = gemini_resp.get("reasoning", "No reasoning found.")
+        analysis = gemini_resp.get("analysis", "No analysis found.")
+        summary = gemini_resp.get("summary", "No summary found.")
 
+        entry = {
+            "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "repo_name": repo_query,
+            "reasoning": reasoning,
+            "analysis": analysis,
+            "summary": summary
+        }
 
-# Render history below the output
-history_box.markdown("---")
-history_box.markdown("### History")
+        st.session_state.history.append(entry)
+        save_to_history(entry)
+
+        # Tabs Layout
+        tab1, tab2, tab3 = st.tabs(["🧠 Reasoning", "📊 Analysis", "📝 Summary"])
+        with tab1:
+            st.markdown(reasoning)
+        with tab2:
+            st.markdown(analysis)
+        with tab3:
+            st.markdown(summary)
+    else:
+        st.warning("Please enter a valid repository name.")
+
+# ---------------------- History Viewer ----------------------
+
+st.divider()
+st.subheader("📜 Your Session History")
+
 if st.session_state.history:
-	# Show recent queries in a dropdown (newest first)
-	recent = list(reversed(st.session_state.history[-20:]))
-	# include a visible placeholder option at the top so nothing is selected by default
-	placeholder_label = "-- select a previous query --"
-	options = [placeholder_label] + [q for q, _ in recent]
-	selected = history_box.selectbox("Select a previous query", options, index=0, key="history_select")
-	# find selected result
-	if selected == placeholder_label:
-		history_box.write("No query selected — choose one from the dropdown to view its result.")
-	else:
-		idx = options.index(selected) - 1  # adjust for blank option at head
-		qsel, rsel = recent[idx]
-		history_box.markdown(f"**{html.escape(qsel)}**")
-		if isinstance(rsel, dict) and rsel.get("summary"):
-			s = rsel.get("summary")
-			if isinstance(s, (dict, list)):
-				import json
-				history_box.text(json.dumps(s, indent=2))
-			else:
-				history_box.write(s)
-		elif isinstance(rsel, dict) and rsel.get("error"):
-			history_box.write(f"Error: {rsel.get('error')}")
-		else:
-			history_box.write(rsel)
+    for item in reversed(st.session_state.history):
+        with st.expander(f"🕒 {item['timestamp']} — {item['repo_name']}"):
+            st.markdown(f"**Reasoning:**\n{item['reasoning']}")
+            st.markdown(f"**Analysis:**\n{item['analysis']}")
+            st.markdown(f"**Summary:**\n{item['summary']}")
 else:
-	history_box.write("No history yet — run a query.")
-
-
-st.caption(f"Backend: {BACKEND_URL} — override with BACKEND_URL env var")
-
+    st.info("No session analyses yet.")
