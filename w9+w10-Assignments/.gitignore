@@ -2,5 +2,6 @@
 __pycache__
 tempCodeRunnerFile.py
 secrets.toml
+.streamlit
 mcp_agent
 analysis_history.json
