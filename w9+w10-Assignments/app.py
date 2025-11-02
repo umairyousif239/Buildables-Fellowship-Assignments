@@ -17,7 +17,7 @@ ANALYZE_ENDPOINT = f"{BACKEND.rstrip('/')}/analyze_repo"
 
 HISTORY_FILE = "analysis_history.json"
 
-# ---------------------- Session + Cache ----------------------
+# Session + Cache
 
 # 🔹 Initialize session variables
 if "history" not in st.session_state:
@@ -25,7 +25,7 @@ if "history" not in st.session_state:
 if "cache" not in st.session_state:
     st.session_state.cache = {}
 
-# ---------------------- Helpers ----------------------
+# Helpers
 
 def load_history():
     if os.path.exists(HISTORY_FILE):
@@ -90,7 +90,7 @@ def call_gemini(repo_data: dict, query: str):
 
     return parsed
 
-# ---------------------- UI ----------------------
+# UI
 
 st.title("🤖 MCP GitHub Agent (Gemini 2.5 Flash)")
 st.caption("Analyze any public GitHub repo — get reasoning, analysis, and summary.")
@@ -133,7 +133,7 @@ if st.button("Analyze"):
     else:
         st.warning("Please enter a valid repository name.")
 
-# ---------------------- History Viewer ----------------------
+# History Viewer
 
 st.divider()
 st.subheader("📜 Your Session History")
