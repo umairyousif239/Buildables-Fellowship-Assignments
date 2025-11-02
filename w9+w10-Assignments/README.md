@@ -71,7 +71,7 @@ This project demonstrates practical integration of AI models with REST APIs, rea
 
 ```bash
 # 1. Clone the repo
-git clone https://github.com/<your-username>/mcp-github-agent.git
+git clone https://github.com/umairyousif239/Buildables-Fellowship-Assignments/tree/main/w9%2Bw10-Assignments
 cd mcp-github-agent
 
 # 2. Install dependencies
