@@ -49,11 +49,11 @@ This project demonstrates practical integration of AI models with REST APIs, rea
 
 ## 🧩 Architecture
 
-User → Streamlit UI → FastAPI Endpoint (/analyze_repo)
+    User → Streamlit UI → FastAPI Endpoint (/analyze_repo)
 
-                    ↓ ↓
+                        ↓ ↓
 
-Gemini 2.5 Flash ←→ Local JSON Storage
+    Gemini 2.5 Flash ←→ Local JSON Storage
 
 
 ---
